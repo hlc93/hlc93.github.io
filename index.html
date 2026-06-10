@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>陳宏霖｜新媒體藝術家</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <meta
+      content="新媒體藝術家陳宏霖的個人作品集。專注聲音藝術、實體運算與感測互動。"
+      name="description"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        border-top: none !important;
+        background-color: #ffffff !important;
+      }
+
+      /* 表單元素 */
+      input,
+      textarea,
+      button,
+      .form-element {
+        padding: 8px 12px !important;
+        height: auto !important;
+        line-height: normal !important;
+        border: 1px solid #ccc !important;
+      }
+
+      /* 導航列 - 透明背景 */
+      .site-header,
+      .site-header.dark-bg {
+        background-color: transparent !important;
+        background: transparent !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        line-height: 1 !important;
+        height: 60px;
+        padding: 0 20px !important;
+        transition: background-color 0.6s ease !important;
+      }
+
+      .site-header * {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #ffffff !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover,
+      .site-header .site-header-toggle:hover {
+        color: #cccccc !important;
+      }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .admin-btn,
+      .login-btn,
+      .logout-link {
+        color: #ffffff !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: color 0.3s ease !important;
+        text-decoration: none;
+      }
+
+      .admin-btn:hover,
+      .login-btn:hover,
+      .logout-link:hover {
+        color: #cccccc !important;
+      }
+
+      .site-header.scrolled .admin-btn,
+      .site-header.scrolled .login-btn,
+      .site-header.scrolled .logout-link {
+        color: #ffffff !important;
+      }
+
+      .site-header-toggle {
+        display: none !important;
+      }
+
+      /* 滾動時的導航欄樣式 */
+      .site-header.scrolled {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        background: rgba(0, 0, 0, 0.7) !important;
+        transition: background-color 0.3s ease;
+      }
+
+      .site-header.scrolled .site-logo,
+      .site-header.scrolled .nav-link,
+      .site-header.scrolled .site-header-toggle {
+        color: #ffffff !important;
+      }
+
+      /* 滾動時導航列項目的懸停效果 */
+      .site-header.scrolled .nav-link:hover {
+        color: #cccccc !important;
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu {
+          display: none !important;
+        }
+
+        .site-header-toggle {
+          display: flex !important;
+        }
+      }
+
+      .site-banner {
+        position: relative;
+        overflow: hidden;
+        background: #000;
+        margin: 0 !important;
+        margin-top: 60px;
+        padding: 0 !important;
+        width: 100%;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        border: none !important;
+        gap: 0 !important;
+        line-height: 0 !important;
+      }
+
+      .site-banner-video {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      .site-banner::before {
+        z-index: 1;
+      }
+
+      .site-banner-bg,
+      .site-banner-content,
+      .site-banner-form {
+        position: relative;
+        z-index: 2;
+      }
+
+      .site-banner::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        width: 100%; height: 100%;
+      }
+
+      .site-banner-bg {
+        display: none;
+      }
+
+      .site-banner-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .site-banner-content h1 {
+        animation: slideInDown 0.8s ease-out;
+        color: white;
+        margin: 0;
+      }
+
+      @keyframes slideInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .form-element {
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .site-banner-form {
+        position: relative;
+        z-index: 2;
+        padding: 20px 0;
+      }
+
+      .site-banner-form .form-element {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        color: #333;
+        padding: 8px 12px !important;
+        height: auto !important;
+        line-height: normal !important;
+      }
+
+      .site-banner-form .form-element::placeholder {
+        color: rgba(0, 0, 0, 0.5);
+      }
+
+      .site-banner-form .button-pink {
+        background: #1a1a1a;
+        border: none !important;
+        padding: 8px 20px !important;
+        height: auto !important;
+        line-height: normal !important;
+        min-height: 40px;
+      }
+
+      .form-element:focus {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+
+      .button-pink {
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .button-pink:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .button-pink:active {
+        transform: translateY(-1px);
+      }
+
+      .card {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
+
+      .card:hover {
+        transform: none;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .card img {
+        transition: transform 0.4s ease;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .card:hover img {
+        transform: scale(1.05);
+        filter: brightness(0.8);
+      }
+
+      .card-center {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        text-align: center;
+        min-height: 80px;
+        z-index: 3;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover .card-center {
+        transform: translateY(15px);
+      }
+
+      @keyframes textFloat {
+        0% {
+          transform: translateY(20px);
+        }
+        100% {
+          transform: translateY(15px);
+        }
+      }
+
+      .section-header {
+        position: relative;
+        padding: 40px 0;
+        animation: fadeInUp 0.6s ease-out;
+        background: transparent !important;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #1a1a1a, transparent);
+        margin: 8px auto 16px;
+      }
+
+      .site-main > .card {
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+      }
+
+      .scroll-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #1a1a1a;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        z-index: 99;
+      }
+
+      .scroll-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: #333333;
+      }
+
+      .scroll-to-top.show {
+        display: flex;
+      }
+
+      .divider-section {
+        height: 1px;
+        background: linear-gradient(to right, transparent, #1a1a1a, transparent);
+        margin: 80px 0;
+        opacity: 0.5;
+      }
+
+      .site-footer {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+        transition: all 0.3s ease;
+      }
+
+      .site-footer .nav-link {
+        color: #ccc;
+      }
+
+      .site-footer .nav-link:hover {
+        color: #ffffff;
+      }
+
+      .block-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ffffff;
+        padding-bottom: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .site-main {
+        background: #ffffff !important;
+        padding: 60px 0 !important;
+      }
+
+      .site-main > .container {
+        background: transparent !important;
+      }
+
+      .artist-statement-section {
+        background: url('./images/13.jpeg') center/cover no-repeat;
+        background-size: cover;
+        width: 100%;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+      }
+
+      .artist-statement-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .artist-statement-section:hover::before {
+        z-index: 1;
+      }
+
+      .artist-statement-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        text-align: center;
+        color: white;
+        padding: 40px;
+      }
+
+      .artist-statement-content .section-title {
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: white;
+        margin: 0;
+      }
+
+      .artist-statement-content .title-sub {
+        font-size: 18px;
+        margin-top: 20px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      @media (max-width: 768px) {
+        .scroll-to-top {
+          width: 45px;
+          height: 45px;
+          bottom: 20px;
+          right: 20px;
+          font-size: 20px;
+        }
+
+        .section-header {
+          padding: 30px 0;
+        }
+
+        .divider-section {
+          margin: 50px 0;
+        }
+      }
+
+      /* 手機版選單覆寫 */
+      @media (max-width: 992px) {
+        /* 選單預設透明，scrolled 後才顯示底色 */
+        .site-header .site-menu.is-open {
+          background: transparent !important;
+          background-color: transparent !important;
+        }
+
+        .site-header.scrolled .site-menu.is-open {
+          background: rgba(0, 0, 0, 0.7) !important;
+          background-color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        /* 選單內所有元素背景透明（讓選單底色透出來） */
+        .site-header .site-menu.is-open * {
+          background: transparent !important;
+          background-color: transparent !important;
+        }
+
+        /* 每個項目高度固定、間距整齊 */
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          max-height: none !important;
+          align-items: unset !important;
+          line-height: 1.4 !important;
+          padding: 14px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border-bottom: none !important;
+          color: #ffffff !important;
+          font-size: 15px !important;
+        }
+
+        .site-header .site-menu.is-open #login-button-container {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          flex-direction: unset !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+
+    </style>
+  </head>
+  <body style="background-color: #ffffff !important;">
+    <header class="site-header dark-bg">
+      <div class="site-logo">HONGLIN CHEN</div>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="./portfolio.html">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link active" href="./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+    <div class="site-banner">
+      <video class="site-banner-video" autoplay muted loop playsinline>
+        <source src="./images/banner.mp4" type="video/mp4">
+      </video>
+      <div class="site-banner-bg"></div>
+      <div class="site-banner-content">
+        <h1 class="title">聲響實驗計畫</h1>
+      </div>
+      <div class="site-banner-form">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-8">
+              <input
+                class="form-element"
+                placeholder="名稱、媒材、展覽或年份"
+                type="text"
+              />
+            </div>
+            <div class="col-xs-4">
+              <input class="button button-pink" type="submit" value="搜尋" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-main">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="title">
+            <div class="section-title">聲音感知計畫</div>
+            <div class="title-sub">
+              擷取實體環境與器樂聲響的動態資料，透過數位媒介將隱形的聽覺波形轉譯為可視的空間感知。
+            </div>
+          </h2>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <a href="./projects.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/2.jpeg"
+                />
+                <h2 class="card-center text-white title">專題紀錄</h2>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="./arduino-sensor.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/3.jpeg"
+                />
+                <h2 class="card-center text-white title">
+                  Arduino 實體感測裝置
+                </h2>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="./touchdesigner-interactive.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/4.jpeg"
+                />
+                <h2 class="card-center text-white title">
+                  TouchDesigner 影音互動
+                </h2>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="divider-section"></div>
+        <div class="section-header text-center">
+          <h2 class="title">
+            <div class="section-title">作品系列</div>
+            <div class="title-sub">
+              在機械運作、資料身體與雲端夢境之間，展開對當代數位生態與技術詩學的複合式現地感知。
+            </div>
+          </h2>
+        </div>
+        <div class="row card-grid">
+          <div class="col-sm-8">
+            <a href="./performance-records.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/11.jpeg"
+                />
+                <h2 class="card-center text-white title">表演紀錄</h2>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="./studio-notes.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/5.jpeg"
+                />
+                <h2 class="card-center text-white title">工作室筆記</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="row card-grid">
+          <div class="col-sm-4">
+            <a href="./signal-translation.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/6.jpeg"
+                />
+                <h2 class="card-center text-white title">訊號轉譯</h2>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="./mechanical-garden.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/7.jpeg"
+                />
+                <h2 class="card-center text-white title">機械花園</h2>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="./cloud-dreams.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/8.jpeg"
+                />
+                <h2 class="card-center text-white title">雲端夢境</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="row card-grid">
+          <div class="col-sm-4">
+            <a href="./sensor-theater.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/10.jpeg"
+                />
+                <h2 class="card-center text-white title">感測劇場</h2>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-8">
+            <a href="./sound-map.html" style="text-decoration: none; display: block;">
+              <div class="card">
+                <img
+                  alt="新媒體藝術作品示意影像"
+                  class="img-fluid"
+                  src="./images/12.jpeg"
+                />
+                <h2 class="card-center text-white title">聲音地圖</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="divider-section"></div>
+      <div class="artist-statement-section">
+        <div class="artist-statement-content">
+          <div class="section-title">ARTIST STATEMENT</div>
+          <div class="title-sub">
+            專注實體運算、感測互動與聲音藝術的整合。試圖在傳統音律與數位媒介間，重構觀者空間與感知的檔案。
+          </div>
+        </div>
+      </div>
+      <div class="divider-section"></div>
+      <div class="section-header text-center">
+        <h2 class="title">介面詩學</h2>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card">
+              <img
+                alt="新媒體藝術作品示意影像"
+                class="img-fluid"
+                src="./images/2.jpeg"
+              />
+              <h2 class="card-center text-white title"></h2>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <img
+                alt="新媒體藝術作品示意影像"
+                class="img-fluid"
+                src="./images/3.jpeg"
+              />
+              <h2 class="card-center text-white title"></h2>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <img
+                alt="新媒體藝術作品示意影像"
+                class="img-fluid"
+                src="./images/4.jpeg"
+              />
+              <h2 class="card-center text-white title"></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer dark-bg">
+      <div class="container site-footer-inner">
+        <div class="row">
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">探索作品</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="./about.html">關於藝術家</a></li>
+              <li><a class="nav-link" href="./portfolio.html">作品集</a></li>
+              <li><a class="nav-link" href="./sound-art.html">聲音藝術</a></li>
+              <li><a class="nav-link" href="./sensor-interactive.html">感測互動</a></li>
+              <li><a class="nav-link" href="./physical-computing.html">實體運算</a></li>
+              <li><a class="nav-link" href="./visual-experiment.html">視覺實驗</a></li>
+              <li><a class="nav-link" href="./exhibition-history.html">展覽經歷</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">音樂經歷</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="./conducting.html">樂團指揮</a></li>
+              <li><a class="nav-link" href="./zither-performance.html">古箏演奏</a></li>
+              <li><a class="nav-link" href="./percussion.html">打擊樂</a></li>
+              <li><a class="nav-link" href="./chorus-accompaniment.html">合唱團伴奏</a></li>
+              <li><a class="nav-link" href="./instrument-teaching.html">樂器教學</a></li>
+              <li><a class="nav-link" href="./music-theory.html">音樂理論</a></li>
+              <li><a class="nav-link" href="./band-assistant.html">樂隊助教</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">技術領域</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="./touchdesigner.html">TouchDesigner</a></li>
+              <li><a class="nav-link" href="./arduino-sensor.html">Arduino</a></li>
+              <li><a class="nav-link" href="./sound-synthesis.html">聲音合成</a></li>
+              <li><a class="nav-link" href="./maxmsp.html">Max/MSP</a></li>
+              <li><a class="nav-link" href="./visual-design.html">視覺設計</a></li>
+              <li><a class="nav-link" href="./interactive-art.html">互動藝術</a></li>
+              <li><a class="nav-link" href="./multimedia-production.html">多媒體製作</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">聯絡資訊</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="mailto:honglinchen0930c@gmail.com">honglinchen0930c@gmail.com</a></li>
+              <li><a class="nav-link" href="https://www.instagram.com/hlc_lilesavisc._" target="_blank">Instagram</a></li>
+              <li><a class="nav-link" href="https://www.facebook.com/honglin.chen.7587/" target="_blank">Facebook</a></li>
+              <li><a class="nav-link" href="./resume.html">線上履歷</a></li>
+              <li style="margin-top: 20px; border-top: 1px solid #666; padding-top: 15px; color: #ccc;"><strong><a href="https://nma.tnua.edu.tw/" target="_blank" style="color: #ccc; text-decoration: none;">國立臺北藝術大學</a></strong></li>
+              <li style="color: #999; font-size: 13px;"><a href="https://nma.tnua.edu.tw/" target="_blank" style="color: #999; text-decoration: none;">新媒體藝術學系</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <script src="./js/site.js"></script>
+    <script>
+            // 卡片進入動畫（交叉觀察）
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.card, .section-header').forEach(el => {
+        observer.observe(el);
+      });
+
+      // 導航欄滾動效果
+      const video = document.querySelector('.site-banner-video');
+      if (video) video.playbackRate = 0.75;
+
+      const header = document.querySelector('.site-header');
+      const bannerHeight = 450; // 與 .site-banner 的 min-height 對應
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > bannerHeight) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // 平滑連結點擊
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (!href || href === '#') return;
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
