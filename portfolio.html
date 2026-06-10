@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>作品集 | 陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <style>
+      /* 導航列懸停效果 */
+      .site-header .nav-link:hover {
+        color: #ffb6c1 !important;
+        transition: color 0.3s ease;
+      }
+
+      /* 滾動時導航列項目的懸停效果 */
+      .site-header.scrolled .nav-link:hover {
+        color: #ffb6c1 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header dark-bg">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="./portfolio.html">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link active" href="#">媒介實驗</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+    <div class="site-main" style="min-height: 500px; padding: 40px 0;">
+      <div class="container">
+        <h1 style="text-align: center; color: #333; margin-bottom: 30px;">作品集</h1>
+        <p style="text-align: center; color: #666;">此頁面正在建設中...</p>
+      </div>
+    </div>
+    <script>
+      // 導航欄滾動效果
+      const header = document.querySelector('.site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+      ACCESS_CONTROL.init();
+    </script>
+    <script src="./js/site.js"></script>
+  </body>
+</html>

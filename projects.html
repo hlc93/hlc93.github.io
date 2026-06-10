@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>專題紀錄 | 陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <style>
+      body {
+        background-color: #0d1b3e !important;
+        overflow-x: hidden;
+      }
+
+      * { margin: 0; padding: 0; border: 0; }
+
+      html {
+        scroll-behavior: smooth;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      /* 導航列 */
+      .site-header,
+      .site-header.dark-bg {
+        background-color: transparent !important;
+        background: transparent !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 20px !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        transition: background-color 0.6s ease !important;
+      }
+
+      .site-header * {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-decoration: none !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #ffffff !important;
+        background: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover,
+      .site-header .site-header-toggle:hover {
+        color: #a8c4ff !important;
+      }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .admin-btn, .login-btn, .logout-link {
+        color: #ffffff !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: color 0.3s ease !important;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .admin-btn:hover, .login-btn:hover, .logout-link:hover {
+        color: #ffb6c1 !important;
+      }
+
+      .site-header-toggle {
+        display: none !important;
+      }
+
+      .site-header.scrolled {
+        background-color: rgba(10, 30, 70, 0.85) !important;
+        background: rgba(10, 30, 70, 0.85) !important;
+        transition: background-color 0.6s ease;
+      }
+
+      .site-header.scrolled .nav-link:hover {
+        color: #a8c4ff !important;
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu {
+          display: none !important;
+        }
+        .site-header-toggle {
+          display: flex !important;
+        }
+      }
+
+      /* 主內容 */
+      .site-main {
+        padding: 60px 20px !important;
+        background: transparent !important;
+        margin-top: 60px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* 頁面標題 */
+      .page-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding-bottom: 40px;
+        border-bottom: 2px solid #1a4a8a;
+      }
+
+      .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #e8f0ff;
+        margin-bottom: 15px;
+      }
+
+      .page-header p {
+        font-size: 18px;
+        color: #a8c4ff;
+      }
+
+      /* 作品卡片 */
+      .performance-card {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(150,190,255,0.15);
+        border-radius: 8px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+
+      .performance-card:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+      }
+
+      .performance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .performance-date {
+        font-size: 14px;
+        color: #6688aa;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .performance-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #e8f0ff;
+        margin: 10px 0 5px 0;
+      }
+
+      .performance-title-en {
+        font-size: 16px;
+        color: #999;
+        font-weight: 400;
+        margin-bottom: 8px;
+        letter-spacing: 0.05em;
+      }
+
+      .performance-organization {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      /* YouTube 播放器 */
+      .youtube-container {
+        width: 100%;
+        margin-bottom: 30px;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+      }
+
+      .youtube-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .song-video {
+        margin-bottom: 30px;
+      }
+
+      .video-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #c8daff;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #4a7adf;
+      }
+
+      /* 說明區塊 */
+      .songs-section {
+        margin-bottom: 24px;
+      }
+
+      .songs-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #c8daff;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #4a7adf;
+      }
+
+      .songs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .songs-list li {
+        padding: 8px 0 8px 30px;
+        color: #a8c4ff;
+        font-size: 14px;
+        position: relative;
+        line-height: 1.6;
+      }
+
+      .songs-list li:before {
+        content: '✦';
+        position: absolute;
+        left: 10px;
+        color: #1a4a8a;
+        font-weight: bold;
+      }
+
+      .role-badge {
+        display: inline-block;
+        background: #1a4a8a;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 4px;
+      }
+
+      .role-badge.secondary {
+        background: #3a5a8a;
+      }
+
+      /* 作品概述段落 */
+      .description-text {
+        font-size: 15px;
+        color: #a8c4ff;
+        line-height: 1.9;
+        letter-spacing: 0.02em;
+        padding: 20px;
+        background: rgba(150,190,255,0.06);
+        border-radius: 6px;
+        border-left: 3px solid #1a4a8a;
+      }
+
+      /* 頁腳 */
+      .site-footer {
+        background: #2a2a2a;
+        color: #ccc;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 14px;
+      }
+
+      /* 手機版選單覆寫 - 深藍色 */
+      @media (max-width: 992px) {
+        .site-header .site-menu.is-open {
+          background: transparent !important;
+          transition: background 0.6s ease;
+        }
+
+        .site-header.scrolled .site-menu.is-open {
+          background: rgba(10, 30, 70, 0.85) !important;
+        }
+
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          max-height: none !important;
+          line-height: 1.4 !important;
+          padding: 20px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border: none !important;
+          color: #ffffff !important;
+          font-size: 13px !important;
+        }
+
+        .site-header .site-menu.is-open #login-button-container {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <canvas id="star-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <header class="site-header dark-bg" style="z-index:1000;">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="./portfolio.html">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link active" href="./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+
+    <div class="site-main" style="position:relative;z-index:1;">
+      <div class="container">
+
+        <div class="page-header">
+          <h1>專題紀錄</h1>
+          <p>跨媒材的創作探索與互動藝術實踐</p>
+        </div>
+
+        <!-- 作品：浮游 Floating -->
+        <div class="performance-card">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2026年5月17日　大一下學期專題</div>
+              <h2 class="performance-title">浮游</h2>
+              <p class="performance-title-en">Floating</p>
+              <p class="performance-organization">國立臺北藝術大學</p>
+            </div>
+            <div>
+              <span class="role-badge">互動音像</span>
+              <span class="role-badge secondary">06'28"</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">作品影片</h4>
+            <div class="youtube-container">
+              <iframe
+                src="https://www.youtube.com/embed/Wi3Dr2-sr7I"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">媒材</h3>
+            <ul class="songs-list">
+              <li>TouchDesigner</li>
+              <li>Arduino</li>
+              <li>DaVinci Resolve</li>
+              <li>4.3 Octave Marimba × 2 &amp; 4 Mallets</li>
+            </ul>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">作品概述</h3>
+            <p class="description-text">
+              《浮游 Floating》是一件探討「自我存在」的音像互動作品。作品以水波等意象，映射出個體面對生命時的迷茫與不安。透過編排左右聲道，模擬內心深處自我的對話、懷疑、否定與假裝。
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <footer style="position:relative;z-index:1;background: rgba(10, 30, 70, 0.9); color: #a8c4ff; text-align: center; padding: 30px 20px; font-size: 14px;">
+      <p>&copy; 2026 HONGLIN CHEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      header.classList.add('scrolled');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script src="./js/site.js"></script>
+
+    <script>
+      (function() {
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = window.innerWidth, H = window.innerHeight;
+
+        function resize() {
+          W = window.innerWidth; H = window.innerHeight;
+          canvas.width = Math.floor(W * devicePixelRatio);
+          canvas.height = Math.floor(H * devicePixelRatio);
+          canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        let mouse = { x: -999, y: -999, px: -999, py: -999 };
+        window.addEventListener('mousemove', e => {
+          mouse.px = mouse.x; mouse.py = mouse.y;
+          mouse.x = e.clientX; mouse.y = e.clientY;
+        });
+        window.addEventListener('blur', () => { mouse.x = -999; mouse.y = -999; });
+
+        const MAX = 70;
+        function makeStar() {
+          const r = 0.3 + Math.random() * 1.4;
+          return {
+            x: Math.random()*W, y: Math.random()*H,
+            vx: (Math.random()-0.5)*0.15, vy: (Math.random()-0.5)*0.15,
+            r, alpha: 0, maxAlpha: 0.4+Math.random()*0.5,
+            twinkle: Math.random()*Math.PI*2,
+            twinkleSpeed: 0.02+Math.random()*0.03,
+            hasCross: r > 1.3 && Math.random() < 0.25,
+            state: 'in', life: 0, maxLife: 600+Math.random()*800
+          };
+        }
+        let stars = Array.from({length: MAX}, () => {
+          const s = makeStar();
+          s.alpha = s.maxAlpha*Math.random(); s.state = 'hold';
+          s.life = Math.floor(Math.random()*s.maxLife);
+          return s;
+        });
+
+        function draw() {
+          ctx.fillStyle = '#0d1b3e';
+          ctx.fillRect(0, 0, W, H);
+          const mvx = mouse.x - mouse.px, mvy = mouse.y - mouse.py;
+
+          for (let i = 0; i < stars.length; i++) {
+            for (let j = i+1; j < stars.length; j++) {
+              const dx = stars[i].x - stars[j].x, dy = stars[i].y - stars[j].y;
+              const d = Math.sqrt(dx*dx + dy*dy);
+              if (d < 120) {
+                const a = Math.min(stars[i].alpha, stars[j].alpha) * (1-d/120) * 0.35;
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(160,200,255,${a})`;
+                ctx.lineWidth = 0.4;
+                ctx.moveTo(stars[i].x, stars[i].y);
+                ctx.lineTo(stars[j].x, stars[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+
+          for (let i = 0; i < stars.length; i++) {
+            const s = stars[i];
+            const dx = s.x - mouse.x, dy = s.y - mouse.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 70 && dist > 0 && mouse.x !== -999) {
+              const force = (70-dist)/70;
+              s.vx += (mvx*0.04 + dx/dist*0.16)*force;
+              s.vy += (mvy*0.04 + dy/dist*0.16)*force;
+            }
+            const speed = Math.sqrt(s.vx*s.vx + s.vy*s.vy);
+            if (speed > 0.64) { s.vx = s.vx/speed*0.64; s.vy = s.vy/speed*0.64; }
+            s.vx *= 0.99; s.vy *= 0.99;
+            s.x += s.vx; s.y += s.vy;
+            if (s.x < 0) s.x = W; if (s.x > W) s.x = 0;
+            if (s.y < 0) s.y = H; if (s.y > H) s.y = 0;
+            s.twinkle += s.twinkleSpeed;
+            const ta = s.alpha * (0.7 + 0.3*Math.sin(s.twinkle));
+            s.life++;
+            if (s.state === 'in') { s.alpha += 0.002; if (s.alpha >= s.maxAlpha) { s.alpha = s.maxAlpha; s.state = 'hold'; } }
+            else if (s.state === 'hold') { if (s.life > s.maxLife) s.state = 'out'; }
+            else { s.alpha -= 0.001; if (s.alpha <= 0) { stars[i] = makeStar(); continue; } }
+            ctx.save();
+            ctx.globalAlpha = ta;
+            ctx.fillStyle = s.r > 1.1 ? '#e8f0ff' : '#a8c4ff';
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+            ctx.fill();
+            if (s.hasCross) {
+              const rl = s.r * 3.5;
+              ctx.strokeStyle = 'rgba(200,225,255,0.35)';
+              ctx.lineWidth = 0.4;
+              ctx.beginPath();
+              ctx.moveTo(s.x-rl, s.y); ctx.lineTo(s.x+rl, s.y);
+              ctx.moveTo(s.x, s.y-rl); ctx.lineTo(s.x, s.y+rl);
+              ctx.stroke();
+            }
+            ctx.restore();
+          }
+          mouse.px = mouse.x; mouse.py = mouse.y;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+  </body>
+</html>

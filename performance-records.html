@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>表演紀錄｜陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <meta content="陳宏霖的表演紀錄與影片集合。" name="description" />
+    <style>
+      /* 全局背景色 */
+      body {
+        background-color: #fae6e6 !important;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        border-top: none !important;
+      }
+
+      /* 導航列 - 透明背景 */
+      .site-header,
+      .site-header.dark-bg {
+        background-color: transparent !important;
+        background: transparent !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        line-height: 1 !important;
+        height: 60px;
+        padding: 0 20px !important;
+        transition: background-color 0.6s ease !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-decoration: none !important;
+        background: transparent !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #ffffff !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover,
+      .site-header .site-header-toggle:hover {
+        color: #ffaaaa !important;
+      }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .admin-btn,
+      .login-btn,
+      .logout-link {
+        color: #ffffff !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: color 0.3s ease !important;
+        text-decoration: none;
+      }
+
+      .admin-btn:hover,
+      .login-btn:hover,
+      .logout-link:hover {
+        color: #ff9fb5 !important;
+      }
+
+      .site-header-toggle {
+        display: none !important;
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu {
+          display: none !important;
+        }
+        .site-header-toggle {
+          display: flex !important;
+        }
+      }
+
+      /* 滾動時的導航欄樣式 */
+      .site-header.scrolled {
+        background-color: rgba(100, 20, 20, 0.85) !important;
+        background: rgba(100, 20, 20, 0.85) !important;
+        transition: background-color 0.6s ease;
+      }
+
+      .site-header.scrolled .site-logo,
+      .site-header.scrolled .nav-link,
+      .site-header.scrolled .site-header-toggle {
+        color: #ffffff !important;
+      }
+
+      /* 滾動時導航列項目的懸停效果 */
+      .site-header.scrolled .nav-link:hover {
+        color: #ffaaaa !important;
+      }
+
+      /* 主容器 */
+      .site-main {
+        padding: 60px 20px !important;
+        background: transparent !important;
+        position: relative;
+        z-index: 3;
+        margin-top: 60px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* 頁面標題 */
+      .page-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding-bottom: 40px;
+        border-bottom: 2px solid #c0392b;
+      }
+
+      .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #2a2a2a;
+        margin-bottom: 15px;
+      }
+
+      .page-header p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      /* 表演紀錄卡片 */
+      .performance-card {
+        background: white;
+        border-radius: 8px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .performance-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+
+      .performance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .performance-date {
+        font-size: 14px;
+        color: #999;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .performance-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #2a2a2a;
+        margin: 10px 0 5px 0;
+      }
+
+      .performance-organization {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      /* YouTube 播放器容器 */
+      .youtube-container {
+        width: 100%;
+        margin-bottom: 30px;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+      }
+
+      .youtube-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* 帶標題的視頻容器 */
+      .song-video {
+        margin-bottom: 30px;
+      }
+
+      .video-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2a2a2a;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #c0392b;
+      }
+
+      .playlist-link {
+        display: inline-block;
+        background: #f5f5f5;
+        color: #c0392b;
+        padding: 12px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+      }
+
+      .playlist-link:hover {
+        background: #c0392b;
+        color: white;
+      }
+
+      .no-video {
+        width: 100%;
+        height: 300px;
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 16px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+
+      /* 無法嵌入的影片 */
+      .video-unavailable {
+        width: 100%;
+        height: 300px;
+        background: linear-gradient(135deg, #fff5f7 0%, #ffe8f0 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        border: 2px dashed #ffb6c1;
+        padding: 30px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      .video-unavailable p {
+        margin: 10px 0;
+        font-size: 14px;
+      }
+
+      .video-unavailable a {
+        display: inline-block;
+        background: #c0392b;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .video-unavailable a:hover {
+        background: #ff9fb5;
+        transform: translateY(-2px);
+      }
+
+      /* 曲目列表 */
+      .songs-section {
+        margin-bottom: 20px;
+      }
+
+      .songs-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2a2a2a;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #c0392b;
+      }
+
+      .songs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .songs-list li {
+        padding: 8px 0 8px 30px;
+        color: #555;
+        font-size: 14px;
+        position: relative;
+      }
+
+      .songs-list li:before {
+        content: '♫';
+        position: absolute;
+        left: 10px;
+        color: #c0392b;
+        font-weight: bold;
+      }
+
+      /* 職責標籤 */
+      .role-badge {
+        display: inline-block;
+        background: #c0392b;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 15px;
+      }
+
+      /* 二級標題 */
+      .subtitle {
+        font-size: 16px;
+        color: #666;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      /* 頁腳 */
+      .site-footer {
+        background: #2a2a2a;
+        color: #ccc;
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 60px;
+        font-size: 14px;
+      }
+
+      .site-footer a {
+        color: #c0392b;
+        text-decoration: none;
+      }
+
+      .site-footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* 返回按鈕 */
+      .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: #c0392b;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #ff9fb5;
+      }
+
+      /* 響應式設計 */
+      @media (max-width: 768px) {
+        .page-header h1 {
+          font-size: 32px;
+        }
+
+        .performance-card {
+          padding: 25px;
+        }
+
+        .performance-title {
+          font-size: 20px;
+        }
+
+        .performance-header {
+          flex-direction: column;
+        }
+
+        .youtube-container {
+          aspect-ratio: 16 / 9;
+        }
+      }
+
+      /* 版權限制影片卡片 */
+      .video-unavailable-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 24px;
+        background: #fff8fa;
+        border: 1px solid #c0392b;
+        border-left: 4px solid #ffb6c1;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+
+      .video-unavailable-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+      }
+
+      .video-unavailable-text p {
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 8px;
+      }
+
+      .video-unavailable-link {
+        display: inline-block;
+        color: #fff;
+        background: #c0392b;
+        padding: 7px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .video-unavailable-link:hover {
+        background: #ff9fb5;
+      }
+
+
+      /* 側邊篩選欄 */
+      .page-layout {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+      }
+
+      .sidebar-filter {
+        position: relative;
+        z-index: 3;
+        width: 220px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 80px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        padding: 20px;
+      }
+
+      .sidebar-section-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #aaa;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        margin-top: 20px;
+      }
+
+      .sidebar-section-title:first-child {
+        margin-top: 0;
+      }
+
+      .sidebar-filter .search-input {
+        width: calc(100% - 2px) !important;
+        max-width: 100% !important;
+        padding: 8px 12px !important;
+        border: 1px solid #eee !important;
+        border-radius: 6px !important;
+        font-size: 13px !important;
+        color: #333 !important;
+        outline: none !important;
+        box-sizing: border-box !important;
+        min-height: unset !important;
+        height: auto !important;
+        display: block !important;
+        transition: border-color 0.3s ease;
+      }
+      .sidebar-filter .search-input:focus {
+        border-color: #ffb6c1 !important;
+      }
+
+      .search-input:focus {
+        border-color: #c0392b;
+      }
+
+      .filter-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+        margin-bottom: 4px;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        font-size: 13px;
+        color: #555;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .filter-btn:hover {
+        background: #fff0f3;
+        color: #c0392b;
+      }
+
+      .filter-btn.active {
+        background: #c0392b;
+        color: white;
+        font-weight: 600;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 7px 12px;
+        font-size: 12px;
+        color: #777;
+        text-decoration: none;
+        border-radius: 6px;
+        line-height: 1.4;
+        transition: all 0.2s ease;
+        margin-bottom: 2px;
+      }
+
+      .toc-link:hover {
+        background: #fff0f3;
+        color: #c0392b;
+      }
+
+      .toc-year {
+        font-size: 11px;
+        font-weight: 700;
+        color: #ccc;
+        letter-spacing: 1px;
+        padding: 8px 12px 4px;
+      }
+
+      .main-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: #aaa;
+        font-size: 15px;
+        display: none;
+      }
+
+      @media (max-width: 900px) {
+        .page-layout {
+          flex-direction: column;
+        }
+
+        .sidebar-filter {
+        position: relative;
+        z-index: 3;
+          width: 100%;
+          position: static;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          align-items: flex-start;
+        }
+
+        .sidebar-section-title {
+          width: 100%;
+          margin-top: 0;
+        }
+
+        .filter-btn {
+          width: auto;
+          display: inline-block;
+        }
+
+        .toc-section {
+          display: none;
+        }
+
+        .sidebar-filter .search-input {
+          width: 200px !important;
+          max-width: 200px !important;
+          flex-shrink: 1;
+        }
+      }
+
+
+      /* 手機版選單覆寫 - 深紅色 */
+      @media (max-width: 992px) {
+        .site-header .site-menu.is-open {
+          background: transparent !important;
+          transition: background 0.6s ease;
+        }
+
+        .site-header.scrolled .site-menu.is-open {
+          background: rgba(100, 20, 20, 0.85) !important;
+        }
+
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          max-height: none !important;
+          line-height: 1.4 !important;
+          padding: 20px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border: none !important;
+          color: #ffffff !important;
+          font-size: 13px !important;
+        }
+
+        .site-header .site-menu.is-open #login-button-container {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+
+    </style>
+  </head>
+    <!-- 導航列 -->
+    <canvas id="flower-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;"></canvas>
+    <header class="site-header dark-bg">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="#">作品集</a>
+        <a class="nav-link active" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link" href="./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+
+    <!-- 主內容 -->
+    <div class="site-main">
+      <div class="container">
+        <a class="back-link" href="./index.html">← 返回主頁</a>
+
+        <div class="page-header">
+          <h1>表演紀錄</h1>
+          <p>演出與合作紀錄 2022–2024</p>
+        </div>
+
+        <div class="page-layout">
+
+          <!-- 側邊篩選欄 -->
+          <div class="sidebar-filter">
+            <div class="sidebar-section-title">搜尋</div>
+            <input class="search-input" id="searchInput" placeholder="搜尋曲目、演出名稱…" type="text" />
+
+            <div class="sidebar-section-title">分類</div>
+            <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">全部</button>
+            <button class="filter-btn" data-filter="國樂" onclick="setFilter(this)">國樂</button>
+            <button class="filter-btn" data-filter="合唱" onclick="setFilter(this)">合唱</button>
+            <button class="filter-btn" data-filter="比賽" onclick="setFilter(this)">比賽</button>
+            <button class="filter-btn" data-filter="成發" onclick="setFilter(this)">成發</button>
+
+            <div class="toc-section">
+              <div class="sidebar-section-title">目錄</div>
+              <div class="toc-year">2024</div>
+              <a class="toc-link" href="#perf-1">樂旅竹塹 竹區四校聯合成發</a>
+              <a class="toc-link" href="#perf-2">竹中國樂成發</a>
+              <a class="toc-link" href="#perf-3">竹中合唱成發</a>
+              <a class="toc-link" href="#perf-4">112全國學生音樂比賽 決賽</a>
+              <a class="toc-link" href="#perf-5">112全國學生音樂比賽 初賽</a>
+              <div class="toc-year">2023</div>
+              <a class="toc-link" href="#perf-6">竹中國樂成發</a>
+              <a class="toc-link" href="#perf-7">竹中合唱成發</a>
+              <a class="toc-link" href="#perf-8">111全國學生音樂比賽 決賽</a>
+              <div class="toc-year">2022</div>
+              <a class="toc-link" href="#perf-9">111全國學生音樂比賽 初賽</a>
+            </div>
+          </div>
+
+          <!-- 卡片列表 -->
+          <div class="main-content">
+            <div class="no-results" id="noResults">找不到符合的演出紀錄</div>
+
+        <!-- ========== 2024年演出 ========== -->
+
+        <!-- 演出 1: 樂旅竹塹 竹區四校聯合成發 -->
+        <div class="performance-card" id="perf-1" data-category="國樂 成發" data-text="樂旅竹塹 竹區四校聯合成發 茉莉花 劉文金 印象國樂 大曲 姜瑩 藍色的思念 鄧麗君精曲聯奏 關迺忠 2024">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2024年6月16日</div>
+              <h2 class="performance-title">樂旅竹塹 竹區四校聯合成發</h2>
+              <p class="performance-organization">指揮：陳奕全 ／ 戴嘉和</p>
+            </div>
+            <div>
+              <span class="role-badge">打擊</span>
+              <span class="role-badge">古箏</span>
+            </div>
+          </div>
+
+          <a href="https://youtube.com/playlist?list=PLHMIt-YEcFKfO8egWuJ0dnWrqLfpTR_xW" target="_blank" class="playlist-link">📺 查看完整演出播放清單</a>
+
+          <div class="song-video">
+            <h4 class="video-title">茉莉花 ／ 劉文金</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/jRKNUcKJcLU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">印象國樂．大曲 ／ 姜瑩</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/qvcsIbI5qWY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">藍色的思念－鄧麗君精曲聯奏 ／ 編曲：關迺忠</h4>
+            <div class="video-unavailable-card">
+              <div class="video-unavailable-icon">⚠️</div>
+              <div class="video-unavailable-text">
+                <p>此影片因版權限制無法在頁面內嵌入播放</p>
+                <a href="https://www.youtube.com/watch?v=FtjhKim22wI" target="_blank" class="video-unavailable-link">前往 YouTube 觀看 →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">演出曲目</h3>
+            <ul class="songs-list">
+              <li>茉莉花 ／ 劉文金</li>
+              <li>印象國樂．大曲 ／ 姜瑩</li>
+              <li>藍色的思念－鄧麗君精曲聯奏 ／ 編曲：關迺忠</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 演出 2: 竹中國樂成發 2024 -->
+        <div class="performance-card" id="perf-2" data-category="國樂 成發" data-text="竹中國樂成發 太陽的兒子 張列 鈴芽之旅 菊次郎的夏天 久石讓 戰颱風 王昌元 地球儀 2024">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2024年6月2日</div>
+              <h2 class="performance-title">竹中國樂成發</h2>
+              <p class="performance-organization">國立新竹高級中學</p>
+            </div>
+            <div>
+              <span class="role-badge">打擊</span>
+              <span class="role-badge">古箏</span>
+              <span class="role-badge">鋼琴伴奏</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">太陽的兒子 ／ 張列</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/PSpnnIk2hdA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">鈴芽之旅 suzume ／ 自編國樂版</h4>
+            <div class="video-unavailable-card">
+              <div class="video-unavailable-icon">⚠️</div>
+              <div class="video-unavailable-text">
+                <p>此影片因版權限制無法在頁面內嵌入播放</p>
+                <a href="https://youtu.be/jO58OPm-Yjk" target="_blank" class="video-unavailable-link">前往 YouTube 觀看 →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">菊次郎的夏天 ／ 久石讓</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/ov9OavDjXnY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">戰颱風 ／ 王昌元</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/Nf1jbRaNg0s" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">地球儀 ／ 自編國樂版</h4>
+            <div class="video-unavailable-card">
+              <div class="video-unavailable-icon">⚠️</div>
+              <div class="video-unavailable-text">
+                <p>此影片因版權限制無法在頁面內嵌入播放</p>
+                <a href="https://youtu.be/tlupfIpICDU" target="_blank" class="video-unavailable-link">前往 YouTube 觀看 →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">演出曲目</h3>
+            <ul class="songs-list">
+              <li>太陽的兒子 ／ 張列</li>
+              <li>鈴芽之旅 suzume ／ 自編國樂版</li>
+              <li>菊次郎的夏天 ／ 久石讓</li>
+              <li>戰颱風 ／ 王昌元</li>
+              <li>地球儀 ／ 自編國樂版</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 演出 3: 竹中合唱成發 2024 -->
+        <div class="performance-card" id="perf-3" data-category="合唱 成發" data-text="竹中合唱成發 What Was I Made For Billie Eilish Down by the Salley Gardens The Miller of Dee John Rutter 2024">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2024年5月31日</div>
+              <h2 class="performance-title">竹中合唱成發</h2>
+              <p class="performance-organization">竹中合唱團｜76X77成發：76小節的青春樂章</p>
+            </div>
+            <div>
+              <span class="role-badge">鋼琴伴奏</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">What Was I Made For? ／ Billie Eilish</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/U-SeK030cSE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">Down by the Salley Gardens ／ arr. John Rutter</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/MDzIRNdCdiw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">伴奏曲目</h3>
+            <ul class="songs-list">
+              <li>What Was I Made For? ／ Billie Eilish</li>
+              <li>Down by the Salley Gardens ／ arr. John Rutter</li>
+              <li>The Miller of Dee ／ arr. John Rutter</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 演出 4: 112全國學生音樂比賽 決賽 -->
+        <div class="performance-card" id="perf-4" data-category="國樂 比賽" data-text="112全國學生音樂比賽 決賽 中華風 王乙聿 香包調 關迺忠 2024">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2024年3月11日</div>
+              <h2 class="performance-title">112全國學生音樂比賽 決賽</h2>
+              <p class="performance-organization">國立新竹高級中學 國樂合奏</p>
+            </div>
+            <div>
+              <span class="role-badge">古箏</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">中華風 ／ 王乙聿</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/PrjpZ3iDx6U?start=103" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">香包調 ／ 關迺忠</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/at7Ata30cPM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">比賽曲目</h3>
+            <ul class="songs-list">
+              <li>中華風 ／ 王乙聿</li>
+              <li>香包調 ／ 關迺忠</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 演出 5: 112全國學生音樂比賽 初賽 -->
+        <div class="performance-card" id="perf-5" data-category="國樂 比賽" data-text="112全國學生音樂比賽 初賽 中華風 王乙聿 香包調 關迺忠 2023">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2023年11月30日</div>
+              <h2 class="performance-title">112全國學生音樂比賽 初賽</h2>
+              <p class="performance-organization">國立新竹高級中學 國樂合奏</p>
+            </div>
+            <div>
+              <span class="role-badge">古箏</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">中華風 ／ 王乙聿</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/8hQ9gv0BjVo?start=90" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">香包調 ／ 關迺忠</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/ecx0pI5pJ6c?start=49" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">比賽曲目</h3>
+            <ul class="songs-list">
+              <li>中華風 ／ 王乙聿</li>
+              <li>香包調 ／ 關迺忠</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ========== 2023年演出 ========== -->
+
+        <!-- 演出 6: 竹中國樂成發 2023 -->
+        <div class="performance-card" id="perf-6" data-category="國樂 成發" data-text="竹中國樂成發 龍騰虎躍 李民雄 雪落下的聲音 阿里山的姑娘 高佳 絲竹交響 劉長遠 七彩之和 張朝 2023">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2023年6月4日</div>
+              <h2 class="performance-title">竹中國樂成發</h2>
+              <p class="performance-organization">國立新竹高級中學</p>
+            </div>
+            <div>
+              <span class="role-badge">打擊</span>
+              <span class="role-badge">古箏</span>
+              <span class="role-badge">鋼琴伴奏</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">龍騰虎躍 ／ 李民雄</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/8W9mjFnQXxM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">雪落下的聲音</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/36CZjKaxcsM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">阿里山的姑娘 ／ 編曲：高佳</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/fJagg-9fTFU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">絲竹交響 ／ 劉長遠</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/9N_5XPEiAsY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">七彩之和 I. 綠．風之歌 ／ 張朝</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/OvWj-Wg6uKw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">演出曲目</h3>
+            <ul class="songs-list">
+              <li>龍騰虎躍 ／ 李民雄</li>
+              <li>雪落下的聲音</li>
+              <li>阿里山的姑娘 ／ 編曲：高佳</li>
+              <li>絲竹交響 ／ 劉長遠</li>
+              <li>七彩之和 I. 綠．風之歌 ／ 張朝</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 演出 7: 竹中合唱成發 2023 -->
+        <div class="performance-card" id="perf-7" data-category="合唱 成發" data-text="竹中合唱成發 Pura Vida We're The Men Wakati Wa Amani Make a Joyful Noise 花樹下 謝宇威 蔡昱姍 2023">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2023年6月2日</div>
+              <h2 class="performance-title">竹中合唱成發</h2>
+              <p class="performance-organization">新竹高中合唱團</p>
+            </div>
+            <div>
+              <span class="role-badge">鋼琴伴奏</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">合唱團伴奏演出</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/jDyXA5KNjhg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">伴奏曲目</h3>
+            <ul class="songs-list">
+              <li>Pura Vida ／ Cristi Cary Miller</li>
+              <li>We're The Men ／ Jay Althouse</li>
+              <li>Wakati Wa Amani ／ Sally K. Albrecht</li>
+              <li>Make a Joyful Noise ／ Mark Burrows</li>
+              <li>花樹下 ／ 蔡昱姍 合唱編曲</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 演出 8: 111全國學生音樂比賽 決賽 -->
+        <div class="performance-card" id="perf-8" data-category="國樂 比賽" data-text="111全國學生音樂比賽 決賽 臺灣追想曲 蘇文慶 七彩之和 張朝 2023">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2023年3月11日</div>
+              <h2 class="performance-title">111全國學生音樂比賽 決賽</h2>
+              <p class="performance-organization">國立新竹高級中學 國樂合奏</p>
+            </div>
+            <div>
+              <span class="role-badge">打擊</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">臺灣追想曲 ／ 蘇文慶</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/vDfvoZt6qBk?start=34" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">七彩之和 I. 綠．風之歌 ／ 張朝</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/y5hPUPjF5AA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">比賽曲目</h3>
+            <ul class="songs-list">
+              <li>臺灣追想曲 ／ 蘇文慶</li>
+              <li>七彩之和 I. 綠．風之歌 ／ 張朝</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ========== 2022年演出 ========== -->
+
+        <!-- 演出 9: 111全國學生音樂比賽 初賽 -->
+        <div class="performance-card" id="perf-9" data-category="國樂 比賽" data-text="111全國學生音樂比賽 初賽 臺灣追想曲 蘇文慶 七彩之和 張朝 2022">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">2022年12月1日</div>
+              <h2 class="performance-title">111全國學生音樂比賽 初賽</h2>
+              <p class="performance-organization">國立新竹高級中學 國樂合奏</p>
+            </div>
+            <div>
+              <span class="role-badge">打擊</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">臺灣追想曲 ／ 蘇文慶 &amp; 七彩之和 I. 綠．風之歌 ／ 張朝（前段）</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/x5esWEeNp_s?start=85" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">七彩之和 I. 綠．風之歌 ／ 張朝（後段）</h4>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/HIqYM9P1fME" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">比賽曲目</h3>
+            <ul class="songs-list">
+              <li>臺灣追想曲 ／ 蘇文慶</li>
+              <li>七彩之和 I. 綠．風之歌 ／ 張朝</li>
+            </ul>
+          </div>
+        </div>
+
+          </div><!-- end main-content -->
+        </div><!-- end page-layout -->
+      </div>
+    </div>
+
+    <script>
+      let currentFilter = 'all';
+
+      function setFilter(btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        applyFilters();
+      }
+
+      document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+      function applyFilters() {
+        const query = document.getElementById('searchInput').value.trim().toLowerCase();
+        const cards = document.querySelectorAll('.performance-card');
+        let visible = 0;
+
+        cards.forEach(card => {
+          const text = (card.dataset.text || '').toLowerCase();
+          const category = card.dataset.category || '';
+          const matchFilter = currentFilter === 'all' || category.includes(currentFilter);
+          const matchSearch = query === '' || text.includes(query);
+
+          if (matchFilter && matchSearch) {
+            card.style.display = '';
+            visible++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+      }
+    </script>
+
+    <footer style="background: rgba(100, 20, 20, 0.9); color: #ffaaaa; text-align: center; padding: 30px 20px; font-size: 14px; position: relative; z-index: 1;">
+      <p>&copy; 2026 HONGLIN CHEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      header.classList.add('scrolled');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script src="./js/site.js"></script>
+
+    <script>
+      (function() {
+        const canvas = document.getElementById('flower-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = window.innerWidth, H = window.innerHeight;
+
+        function resize() {
+          W = window.innerWidth; H = window.innerHeight;
+          canvas.width = Math.floor(W * devicePixelRatio);
+          canvas.height = Math.floor(H * devicePixelRatio);
+          canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        let mouse = { x: -999, y: -999 };
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('blur', () => { mouse.x = -999; mouse.y = -999; });
+
+        function makeBud() {
+          return {
+            x: Math.random() * W, y: Math.random() * H,
+            petals: 4 + Math.floor(Math.random() * 2),
+            baseR: 12 + Math.random() * 20,
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: 0,
+            bloom: 0, alpha: 0,
+            hue: 350 + Math.random() * 20,
+            state: 'idle'
+          };
+        }
+
+        let buds = Array.from({length: 20}, makeBud);
+
+        function drawBud(b) {
+          const n = b.petals;
+          const bloom = b.bloom;
+          ctx.save();
+          ctx.translate(b.x, b.y);
+          ctx.rotate(b.rot);
+          ctx.strokeStyle = 'rgba(255,255,255,1)';
+          ctx.lineWidth = 1.2;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.globalAlpha = b.alpha;
+
+          if (bloom < 0.05) {
+            ctx.beginPath();
+            ctx.arc(0, 0, b.baseR * 0.35, 0, Math.PI * 2);
+            ctx.stroke();
+          } else {
+            const petalW = b.baseR * (0.15 + bloom * 0.35);
+            const petalH = b.baseR * (0.5 + bloom * 0.5);
+            for (let i = 0; i < n; i++) {
+              const angle = (i / n) * Math.PI * 2;
+              ctx.save();
+              ctx.rotate(angle);
+              ctx.beginPath();
+              ctx.ellipse(0, -b.baseR * (0.4 + bloom * 0.45), petalW, petalH, 0, 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.restore();
+            }
+            ctx.beginPath();
+            ctx.arc(0, 0, b.baseR * 0.1 * (1 - bloom * 0.5), 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        let t = 0;
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+
+          for (let i = buds.length - 1; i >= 0; i--) {
+            const b = buds[i];
+            const dx = b.x - mouse.x, dy = b.y - mouse.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            const near = mouse.x !== -999 && dist < 110;
+
+            if (b.state === 'idle') {
+              b.alpha += 0.0008;
+              if (b.alpha > 0.12) b.alpha = 0.12;
+              if (near) b.state = 'blooming';
+            } else if (b.state === 'blooming') {
+              b.bloom += 0.022;
+              b.alpha = 0.12 + b.bloom * 0.4;
+              if (b.bloom >= 1) { b.bloom = 1; b.state = 'spinning'; b.rotSpeed = 0.003; }
+            } else if (b.state === 'spinning') {
+              // 旋轉消失
+              b.rot += b.rotSpeed;
+              b.rotSpeed += 0.00008;
+              b.alpha -= 0.003;
+              if (b.alpha <= 0) { buds[i] = makeBud(); continue; }
+            }
+
+            drawBud(b);
+          }
+
+          if (t % 120 === 0 && buds.length < 20) buds.push(makeBud());
+          t++;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>教授對不起 | 陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <style>
+      body {
+        background-color: #e8f5e9 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      * { margin: 0; padding: 0; border: 0; }
+
+      html {
+        scroll-behavior: smooth;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      /* 粒子背景 */
+
+
+      .site-header, .site-main, .site-footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* 導航列 */
+      .site-header,
+      .site-header.dark-bg {
+        background-color: transparent !important;
+        background: transparent !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 20px !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        transition: background-color 0.6s ease !important;
+      }
+
+      .site-header * {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-decoration: none !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #ffffff !important;
+        background: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover,
+      .site-header .site-header-toggle:hover {
+        color: #a5d6a7 !important;
+      }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .admin-btn, .login-btn, .logout-link {
+        color: #ffffff !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: color 0.3s ease !important;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .admin-btn:hover, .login-btn:hover, .logout-link:hover {
+        color: #a5d6a7 !important;
+      }
+
+      .site-header-toggle {
+        display: none !important;
+      }
+
+      .site-header.scrolled {
+        background-color: rgba(10, 50, 20, 0.85) !important;
+        background: rgba(10, 50, 20, 0.85) !important;
+      }
+
+      .site-header.scrolled .nav-link:hover {
+        color: #a5d6a7 !important;
+      }
+
+      @media (min-width: 993px) {
+        .site-header .site-menu {
+          display: flex !important;
+        }
+        .site-header-toggle {
+          display: none !important;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu {
+          display: none !important;
+        }
+        .site-header-toggle {
+          display: flex !important;
+        }
+      }
+
+      /* 手機版選單覆寫 - 深綠色 */
+      @media (max-width: 992px) {
+        .site-header .site-menu.is-open {
+          background: transparent !important;
+          transition: background 0.6s ease;
+        }
+
+        .site-header.scrolled .site-menu.is-open {
+          background: rgba(10, 50, 20, 0.85) !important;
+        }
+
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          max-height: none !important;
+          line-height: 1.4 !important;
+          padding: 20px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border: none !important;
+          color: #ffffff !important;
+          font-size: 13px !important;
+        }
+
+        .site-header .site-menu.is-open #login-button-container {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+
+      /* 主內容 */
+      .site-main {
+        padding: 60px 20px !important;
+        background: transparent !important;
+        margin-top: 60px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: #2e7d32;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #1b5e20;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding-bottom: 40px;
+        border-bottom: 2px solid #a5d6a7;
+      }
+
+      .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #1a3a1a;
+        margin-bottom: 15px;
+      }
+
+      .page-header p {
+        font-size: 18px;
+        color: #4a7a4a;
+      }
+
+      .performance-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        border-radius: 8px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 16px rgba(60, 140, 60, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .performance-card:hover {
+        box-shadow: 0 4px 24px rgba(60, 140, 60, 0.25);
+        transform: translateY(-2px);
+      }
+
+      .performance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #c8e6c9;
+      }
+
+      .performance-date {
+        font-size: 14px;
+        color: #66a066;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .performance-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1a3a1a;
+        margin: 10px 0 5px 0;
+      }
+
+      .performance-title-en {
+        font-size: 16px;
+        color: #888;
+        font-weight: 400;
+        margin-bottom: 8px;
+        letter-spacing: 0.05em;
+      }
+
+      .performance-organization {
+        font-size: 14px;
+        color: #4a7a4a;
+        margin-bottom: 20px;
+      }
+
+      .youtube-container {
+        width: 100%;
+        margin-bottom: 30px;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+      }
+
+      .youtube-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .song-video {
+        margin-bottom: 30px;
+      }
+
+      .video-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1a3a1a;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #a5d6a7;
+      }
+
+      .songs-section {
+        margin-bottom: 24px;
+      }
+
+      .songs-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1a3a1a;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #a5d6a7;
+      }
+
+      .songs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .songs-list li {
+        padding: 8px 0 8px 30px;
+        color: #3a6a3a;
+        font-size: 14px;
+        position: relative;
+        line-height: 1.6;
+      }
+
+      .songs-list li:before {
+        content: '✦';
+        position: absolute;
+        left: 10px;
+        color: #a5d6a7;
+        font-weight: bold;
+      }
+
+      .role-badge {
+        display: inline-block;
+        background: #a5d6a7;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 4px;
+      }
+
+      .role-badge.secondary {
+        background: #81c784;
+      }
+
+      .description-text {
+        font-size: 15px;
+        color: #3a6a3a;
+        line-height: 1.9;
+        letter-spacing: 0.02em;
+        padding: 20px;
+        background: #f1f8e9;
+        border-radius: 6px;
+        border-left: 3px solid #a5d6a7;
+      }
+
+      .site-footer {
+        background: linear-gradient(135deg, rgba(10, 50, 20, 0.95) 0%, rgba(5, 30, 10, 0.85) 100%);
+        color: #a5d6a7;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .video-unavailable-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 24px;
+        background: #f1f8e9;
+        border: 1px solid #a5d6a7;
+        border-left: 4px solid #a5d6a7;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+
+      .video-unavailable-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+      }
+
+      .video-unavailable-text p {
+        font-size: 13px;
+        color: #4a7a4a;
+        margin-bottom: 8px;
+      }
+
+      .video-unavailable-link {
+        display: inline-block;
+        color: #fff;
+        background: #a5d6a7;
+        padding: 7px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .video-unavailable-link:hover {
+        background: #81c784;
+      }
+
+    </style>
+  </head>
+  <body>
+    <canvas id="shard-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+    <header class="site-header dark-bg">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="./portfolio.html">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link active" href="./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+
+    <div class="site-main">
+      <div class="container">
+
+        <a class="back-link" href="./index.html">← 返回主頁</a>
+
+        <div class="page-header">
+          <h1>Arduino 實體感測裝置</h1>
+          <p>使用 Arduino 製作的作品</p>
+        </div>
+
+        <div class="performance-card">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">Arduino 互動裝置 ／ 音樂遊戲</div>
+              <h2 class="performance-title">《教授對不起》</h2>
+              <p class="performance-organization">紅外線測距器 × 光敏電阻 × Arduino × TouchDesigner</p>
+            </div>
+            <div>
+              <span class="role-badge">感測互動</span>
+              <span class="role-badge secondary">實體運算</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">作品影片</h4>
+            <div class="video-unavailable-card">
+              <div class="video-unavailable-icon">⚠️</div>
+              <div class="video-unavailable-text">
+                <p>此影片因版權限制無法在頁面內嵌入播放</p>
+                <a href="https://youtu.be/PvtujFxo2Go" target="_blank" class="video-unavailable-link">前往 YouTube 觀看 →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">作品概述</h3>
+            <p class="description-text">
+              《教授對不起》是一件把期末精神崩潰實體化的惡搞互動裝置。作品核心是一首《教授對不起之歌》——作者不堪繁重課業壓力下的真實創作。玩家透過移動雙手控制類特雷門琴：球的高度對應聲音頻率，瘋狂顫抖的姿態效仿期末混亂焦慮、做不完作業的心理狀態。
+            </p>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">設計概念</h3>
+            <ul class="songs-list">
+              <li>Arduino、麵包板、感測器直接裸露在外，呈現臨時抱佛腳、趕工拼湊的製作感，呼應作品主題</li>
+              <li>觸發音效模仿哀嚎聲，以 TouchDesigner 內建音源疊合而成，象徵期末壓力下的崩潰與求救訊號</li>
+              <li>結算畫面借用網路低畫質迷因美學——粗糙視覺帶有即興、失控與荒謬感，像剛從崩潰大腦中誕生就被直接丟上來</li>
+              <li>達到 60% 即觸發 SSS 級最高評價——及格即巔峰，這種落差本身也是作品的趣味所在</li>
+            </ul>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">使用元件</h3>
+            <ul class="songs-list">
+              <li>紅外線測距器（IR Distance Sensor）</li>
+              <li>光敏電阻（Photoresistor / LDR）</li>
+              <li>Arduino 微控制器 ／ 麵包板</li>
+              <li>TouchDesigner（音效合成、視覺介面）</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 HONGLIN CHEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      header.classList.add('scrolled');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script src="./js/site.js"></script>
+
+    <script>
+      (function() {
+        const canvas = document.getElementById('shard-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = window.innerWidth, H = window.innerHeight;
+
+        function resize() {
+          W = window.innerWidth; H = window.innerHeight;
+          canvas.width = Math.floor(W * devicePixelRatio);
+          canvas.height = Math.floor(H * devicePixelRatio);
+          canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        let mouse = { x: -999, y: -999, px: -999, py: -999 };
+        window.addEventListener('mousemove', e => {
+          mouse.px = mouse.x; mouse.py = mouse.y;
+          mouse.x = e.clientX; mouse.y = e.clientY;
+        });
+        window.addEventListener('blur', () => { mouse.x = -999; mouse.y = -999; });
+
+        function makeShard() {
+          const r = 4 + Math.random() * 10;
+          const a1 = Math.random() * Math.PI * 2;
+          const a2 = a1 + Math.PI * 0.5 + Math.random() * Math.PI * 0.8;
+          const a3 = a2 + Math.PI * 0.5 + Math.random() * Math.PI * 0.8;
+          return {
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.21,
+            vy: (Math.random() - 0.5) * 0.21,
+            pts: [
+              [Math.cos(a1)*r*(0.6+Math.random()*0.6), Math.sin(a1)*r*(0.6+Math.random()*0.6)],
+              [Math.cos(a2)*r*(0.6+Math.random()*0.6), Math.sin(a2)*r*(0.6+Math.random()*0.6)],
+              [Math.cos(a3)*r*(0.6+Math.random()*0.6), Math.sin(a3)*r*(0.6+Math.random()*0.6)],
+            ],
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.0024,
+            alpha: 0.06 + Math.random() * 0.03,
+            swing: Math.random() * Math.PI * 2,
+            swingSpeed: 0.0024 + Math.random() * 0.003,
+            swingAmp: 0.15 + Math.random() * 0.2,
+          };
+        }
+
+        let shards = Array.from({length: 35}, makeShard);
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H); // 清除，不留軌跡
+
+          const mvx = mouse.x - mouse.px, mvy = mouse.y - mouse.py;
+
+          for (const s of shards) {
+            s.swing += s.swingSpeed;
+            s.vx += Math.sin(s.swing) * s.swingAmp * 0.006;
+            s.vy += Math.cos(s.swing * 0.7) * s.swingAmp * 0.006;
+
+            const dx = s.x - mouse.x, dy = s.y - mouse.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 70 && mouse.x !== -999) {
+              const force = (70 - dist) / 70 * 0.015;
+              s.vx += (mvx * 0.03 + dx/dist * 0.15) * force * 6;
+              s.vy += (mvy * 0.03 + dy/dist * 0.15) * force * 6;
+            }
+
+            const speed = Math.sqrt(s.vx*s.vx + s.vy*s.vy);
+            if (speed > 0.3) { s.vx = s.vx/speed*0.3; s.vy = s.vy/speed*0.3; }
+            s.vx *= 0.993; s.vy *= 0.993;
+            s.x += s.vx; s.y += s.vy;
+            s.rot += s.rotSpeed;
+            if (s.x < -30) s.x = W+30; if (s.x > W+30) s.x = -30;
+            if (s.y < -30) s.y = H+30; if (s.y > H+30) s.y = -30;
+
+            ctx.save();
+            ctx.translate(s.x, s.y);
+            ctx.rotate(s.rot);
+            ctx.beginPath();
+            ctx.moveTo(s.pts[0][0], s.pts[0][1]);
+            ctx.lineTo(s.pts[1][0], s.pts[1][1]);
+            ctx.lineTo(s.pts[2][0], s.pts[2][1]);
+            ctx.closePath();
+            ctx.fillStyle = `rgba(80,160,100,${s.alpha})`;
+            ctx.fill();
+            ctx.restore();
+          }
+
+          mouse.px = mouse.x; mouse.py = mouse.y;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>關於藝術家｜陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <style>
+      /* 全局背景色 */
+      body {
+        background-color: #fff0f3 !important;
+        overflow-x: hidden;
+      }
+
+      /* 導航列 - 透明背景 */
+      .site-header,
+      .site-header.dark-bg {
+        background-color: transparent !important;
+        background: transparent !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        line-height: 1 !important;
+        height: 60px;
+        padding: 0 20px !important;
+        transition: background-color 0.6s ease !important;
+      }
+
+      .site-header * {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #ffffff !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover,
+      .site-header .site-header-toggle:hover {
+        color: #ff8fa3 !important;
+      }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .admin-btn,
+      .login-btn,
+      .logout-link {
+        color: #e05070 !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: color 0.3s ease !important;
+        text-decoration: none;
+      }
+
+      .admin-btn:hover,
+      .login-btn:hover,
+      .logout-link:hover {
+        color: #c03050 !important;
+      }
+
+      .site-header-toggle {
+        display: none !important;
+      }
+
+      /* 滾動時的導航欄樣式 */
+      .site-header.scrolled {
+        background-color: rgba(120, 40, 60, 0.75) !important;
+        background: rgba(120, 40, 60, 0.75) !important;
+        transition: background-color 0.6s ease;
+      }
+
+      .site-header.scrolled .site-logo,
+      .site-header.scrolled .nav-link,
+      .site-header.scrolled .site-header-toggle {
+        color: #ffffff !important;
+      }
+
+      /* 滾動時導航列項目的懸停效果 */
+      .site-header.scrolled .nav-link:hover {
+        color: #ffb6c1 !important;
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu {
+          display: none !important;
+        }
+
+        .site-header-toggle {
+          display: flex !important;
+        }
+      }
+
+      .about-header {
+        padding: 80px 40px;
+        background: url('./images/1.jpeg') center/cover no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        text-align: center;
+        border-bottom: 1px solid #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 400px;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 !important;
+        margin-top: 60px;
+      }
+
+      .about-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      .about-header > * {
+        position: relative;
+        z-index: 2;
+        color: rgb(0, 0, 0);
+      }
+
+      .about-header .back-link {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .about-header .back-link:hover {
+        color: #ffb6c1;
+      }
+
+      .about-header h1 {
+        color: white;
+      }
+
+      .about-header p {
+        color: rgba(255, 255, 255, 0.8) !important;
+      }
+      
+      .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+      
+      .back-link:hover {
+        color: #ff8fa3;
+      }
+      
+      .about-container {
+        padding: 120px 40px;
+        background: transparent;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      .about-intro {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 60px;
+        margin-bottom: 80px;
+        align-items: start;
+      }
+      
+      .artist-image {
+        text-align: center;
+      }
+      
+      .artist-image img {
+        width: 100%;
+        max-width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+      
+      .artist-content h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #ff8fa3;
+        display: inline-block;
+      }
+      
+      .artist-content p {
+        color: #555;
+        line-height: 1.8;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      
+      .skills-section {
+        margin-top: 60px;
+      }
+      
+      .skills-section h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 25px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid #ff8fa3;
+        display: inline-block;
+      }
+      
+      .skills-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        list-style: none;
+        padding: 0;
+      }
+      
+      .skills-list li {
+        background: #f9f9f9;
+        padding: 20px;
+        border-left: 4px solid #ff8fa3;
+        border-radius: 4px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .skills-list li:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(255, 100, 130, 0.2);
+      }
+      
+      .skills-list strong {
+        color: #e05070;
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      
+      .skills-list span {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      
+      .research-section {
+        background: linear-gradient(135deg, rgba(255, 143, 163, 0.15) 0%, rgba(255, 100, 130, 0.12) 100%);
+        padding: 40px;
+        border-radius: 8px;
+        margin-top: 60px;
+      }
+      
+      .research-section h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid #ff8fa3;
+        display: inline-block;
+      }
+      
+      .research-section p {
+        color: #666;
+        line-height: 1.8;
+        font-size: 15px;
+      }
+      
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 25px;
+      }
+      
+      .tech-tag {
+        background: white;
+        border: 1px solid #e05070;
+        color: #e05070;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .tech-tag:hover {
+        background: #e05070;
+        color: white;
+      }
+      
+      .divider {
+        height: 1px;
+        background: linear-gradient(to right, transparent, #e05070, transparent);
+        margin: 80px 0;
+      }
+      
+      @media (max-width: 768px) {
+        .about-intro {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        
+        .skills-list {
+          grid-template-columns: 1fr;
+        }
+        
+        .about-container {
+          padding: 40px 20px;
+        }
+      }
+
+      /* 手機版選單覆寫 */
+      @media (max-width: 992px) {
+        .site-header .site-menu.is-open {
+          background: transparent !important;
+          background-color: transparent !important;
+          transition: background 0.6s ease;
+        }
+
+        .site-header.scrolled .site-menu.is-open {
+          background: rgba(120, 40, 60, 0.75) !important;
+          background-color: rgba(120, 40, 60, 0.75) !important;
+        }
+
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          max-height: none !important;
+          line-height: 1.4 !important;
+          padding: 20px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border: none !important;
+          color: #ffffff !important;
+          font-size: 13px !important;
+        }
+
+        .site-header .site-menu.is-open #login-button-container {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+
+    </style>
+  </head>
+  <body style="background-color: #fff0f3 !important;">
+    <header class="site-header dark-bg">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link active" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="#">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link" href=./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+
+    <div class="about-header">
+      <a class="back-link" href="./index.html">← 返回主頁</a>
+      <h1 class="title">關於藝術家</h1>
+      <p style="color: #999; font-size: 16px; margin-top: 10px;">陳宏霖 / HONGLIN CHEN</p>
+    </div>
+
+    <div class="about-container" style="position:relative;z-index:1;">
+    <canvas id="sakura-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+      <div class="about-intro">
+        <div class="artist-image" style="position:relative;z-index:10;">
+          <img alt="藝術家肖像" src="./images/profile_2.jpg" />
+        </div>
+
+        <div class="artist-content">
+          <h3>藝術家自述</h3>
+          <p>
+            現為國立臺北藝術大學新媒體藝術系科技組，輔系音樂系。
+          </p>
+          <p>
+            創作實踐專注於實體運算、感測互動與聲音藝術的跨界整合。試圖在傳統音律與數位媒介之間，重構觀者對空間、聲音與感知的身體檔案。
+          </p>
+          
+          <div class="skills-section">
+            <h3>核心專長</h3>
+            <ul class="skills-list">
+              <li>
+                <strong>樂隊指揮 · 演奏</strong>
+                <span>樂團指揮、古箏演奏、打擊樂、合唱團伴奏</span>
+              </li>
+              <li>
+                <strong>音樂教育</strong>
+                <span>樂器教學、音樂理論；曾於新竹市香山區內湖國民小學兒童樂隊擔任助教</span>
+              </li>
+              <li>
+                <strong>實體運算 · 感測</strong>
+                <span>Arduino、感測器設計、信號擷取與轉換</span>
+              </li>
+              <li>
+                <strong>聲音合成 · 互動</strong>
+                <span>TouchDesigner、Max/MSP、聲音設計、多媒體整合</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="research-section">
+        <h3>核心研究領域</h3>
+        <p>
+          將傳統器樂的物理聲響，作為新媒體藝術的聲頻感測，透過距離感測器或光敏電阻擷取動態資料，於數位空間中轉譯為生成式視覺影像。
+        </p>
+        <p style="margin-top: 15px;">
+          探索數位科技如何賦予傳統聲音藝術全新的展演形式，在數位與類比、機械與生物、感知與資料之間，開展跨界的藝術實驗。
+        </p>
+        
+        <div class="tech-tags">
+          <span class="tech-tag">聲音藝術</span>
+          <span class="tech-tag">感測互動</span>
+          <span class="tech-tag">實體運算</span>
+          <span class="tech-tag">TouchDesigner</span>
+          <span class="tech-tag">Arduino</span>
+          <span class="tech-tag">Max/MSP</span>
+          <span class="tech-tag">生成式視覺</span>
+          <span class="tech-tag">音樂科技</span>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer dark-bg" style="position:relative;z-index:1;background: linear-gradient(135deg, rgba(120, 40, 60, 0.95) 0%, rgba(139, 75, 96, 0.85) 100%) !important;">
+      <div class="container site-footer-inner">
+        <div class="row">
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">探索</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="./index.html">首頁</a></li>
+              <li><a class="nav-link" href="./about.html">關於藝術家</a></li>
+              <li><a class="nav-link" href="#">作品集</a></li>
+              <li><a class="nav-link" href="./projects.html">專題紀錄</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">創作主題</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="#">聲音地圖</a></li>
+              <li><a class="nav-link" href="#">感測劇場</a></li>
+              <li><a class="nav-link" href="#">機械花園</a></li>
+              <li><a class="nav-link" href="./cloud-dreams.html">雲端夢境</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">技術領域</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="#">Arduino 實體運算</a></li>
+              <li><a class="nav-link" href="#">TouchDesigner 動畫</a></li>
+              <li><a class="nav-link" href="#">生成式視覺</a></li>
+              <li><a class="nav-link" href="#">音樂科技</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <h3 class="block-title">聯絡</h3>
+            <ul class="nav">
+              <li><a class="nav-link" href="mailto:honglinchen0930c@gmail.com">honglinchen0930c@gmail.com</a></li>
+              <li><a class="nav-link" href="https://www.instagram.com/hlc_lilesavisc._" target="_blank">Instagram</a></li>
+              <li><a class="nav-link" href="https://www.facebook.com/honglin.chen.7587/" target="_blank">Facebook</a></li>
+              <li style="margin-top: 20px; border-top: 1px solid #ffb6c1; padding-top: 15px; color: #ffd0db;"><strong>國立臺北藝術大學</strong></li>
+              <li style="color: #ffb6c1; font-size: 13px;">新媒體藝術系科技組</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 導航欄滾動效果
+      const header = document.querySelector('.site-header');
+      const bannerHeight = 340;
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > bannerHeight) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script src="./js/site.js"></script>
+
+    <script>
+      (function() {
+        const canvas = document.getElementById('sakura-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = window.innerWidth, H = window.innerHeight;
+
+        function resize() {
+          const container = document.querySelector('.about-container');
+          W = container.offsetWidth;
+          H = container.scrollHeight;
+          canvas.width = Math.floor(W * devicePixelRatio);
+          canvas.height = Math.floor(H * devicePixelRatio);
+          canvas.style.width = W + 'px';
+          canvas.style.height = H + 'px';
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+        window.addEventListener('load', function() {
+          resize();
+          window.addEventListener('resize', resize);
+        });
+
+        const MAX = 48;
+        const COLORS = ['rgba(210,120,140,', 'rgba(200,110,130,', 'rgba(220,130,150,', 'rgba(205,115,135,'];
+        let mouse = { x: -999, y: -999, px: -999, py: -999 };
+
+        window.addEventListener('mousemove', e => {
+          mouse.px = mouse.x; mouse.py = mouse.y;
+          const container = document.querySelector('.about-container');
+          const containerTop = container.getBoundingClientRect().top + window.scrollY;
+          const containerLeft = container.getBoundingClientRect().left;
+          const containerBottom = containerTop + container.offsetHeight;
+          const containerRight = containerLeft + container.offsetWidth;
+          const pageY = e.clientY + window.scrollY;
+          const pageX = e.clientX;
+          if (pageX >= containerLeft && pageX <= containerRight &&
+              pageY >= containerTop && pageY <= containerBottom) {
+            mouse.x = pageX - containerLeft;
+            mouse.y = pageY - containerTop;
+          } else {
+            mouse.x = -999; mouse.y = -999;
+          }
+        });
+        window.addEventListener('blur', () => { mouse.x = -999; mouse.y = -999; });
+
+        function makePetal() {
+          return {
+            x: Math.random() * W,
+            y: -20 - Math.random() * 100,
+            vx: (Math.random() - 0.5) * 0.36,
+            vy: 0.15 + Math.random() * 0.36,
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.018,
+            w: (6 + Math.random() * 8) * 0.3,
+            h: (4 + Math.random() * 5) * 0.3,
+            alpha: 0.15 + Math.random() * 0.2,
+            color: COLORS[Math.floor(Math.random() * COLORS.length)],
+            swing: Math.random() * Math.PI * 2,
+            swingSpeed: 0.006 + Math.random() * 0.006
+          };
+        }
+
+        let petals = Array.from({length: MAX}, () => {
+          const p = makePetal();
+          p.y = Math.random() * H;
+          return p;
+        });
+
+        function drawPetal(p) {
+          let fadeAlpha = p.alpha;
+          const fadeStart = H * 0.7;
+          if (p.y > fadeStart) {
+            fadeAlpha = p.alpha * (1 - (p.y - fadeStart) / (H * 0.3));
+            fadeAlpha = Math.max(0, fadeAlpha);
+          }
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.w, p.h, 0, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + fadeAlpha + ')';
+          ctx.fill();
+          ctx.restore();
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+
+          const mvx = mouse.x - mouse.px;
+          const mvy = mouse.y - mouse.py;
+
+          petals.forEach((p, i) => {
+            const dx = p.x - mouse.x, dy = p.y - mouse.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 60 && dist > 0 && mouse.x !== -999) {
+              const force = (60 - dist) / 60;
+              p.vx += (mvx * 0.08 + (dx/dist) * 0.3) * force;
+              p.vy += (mvy * 0.08 + (dy/dist) * 0.1) * force;
+            }
+            const speed = Math.sqrt(p.vx*p.vx + p.vy*p.vy);
+            if (speed > 2) { p.vx = p.vx/speed*2; p.vy = p.vy/speed*2; }
+            p.vx *= 0.97; p.vy *= 0.985;
+            if (p.vy < 0.1) p.vy = 0.1;
+            p.swing += p.swingSpeed;
+            p.x += p.vx + Math.sin(p.swing) * 0.18;
+            p.y += p.vy;
+            p.rot += p.rotSpeed;
+            if (p.y > H + 20) petals[i] = makePetal();
+            drawPetal(p);
+          });
+
+          mouse.px = mouse.x;
+          mouse.py = mouse.y;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+  </body>
+</html>

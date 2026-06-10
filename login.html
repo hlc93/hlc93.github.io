@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>登入 | 陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        overflow: hidden !important;
+        height: 100% !important;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      .login-container {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .login-logo {
+        font-size: 32px;
+        font-weight: 800;
+        color: #000;
+        margin-bottom: 30px;
+        letter-spacing: 2px;
+      }
+
+      .login-title {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .login-subtitle {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #ffb6c1;
+        box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.1);
+      }
+
+      .login-button {
+        width: 100%;
+        padding: 12px;
+        background: #ffb6c1;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .login-button:hover {
+        background: #ff9fb5;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
+      }
+
+      .login-button:active {
+        transform: translateY(0);
+      }
+
+      .error-message {
+        color: #ff6b6b;
+        font-size: 13px;
+        margin-top: 10px;
+        display: none;
+      }
+
+      .error-message.show {
+        display: block;
+      }
+
+      .info-box {
+        background: #fff3f7;
+        border: 1px solid #ffb6c1;
+        border-radius: 6px;
+        padding: 12px;
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .info-box strong {
+        color: #333;
+      }
+
+      @media (max-width: 768px) {
+        .login-container {
+          padding: 30px 20px;
+          margin: 20px;
+        }
+
+        .login-logo {
+          font-size: 24px;
+        }
+
+        .login-title {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-logo">HONGLIN CHEN</div>
+      <h1 class="login-title">進入藝術空間</h1>
+      <p class="login-subtitle">輸入密碼或訪客進入</p>
+
+      <div class="info-box">
+        <strong>提示：</strong> 不輸入密碼，直接登入即可作為訪客訪問。
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="password">密碼</label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="輸入密碼獲得其他檢視權限" 
+            autocomplete="off"
+          />
+        </div>
+
+        <button type="submit" class="login-button" id="loginBtn">登入</button>
+
+        <div class="error-message" id="errorMessage">密碼錯誤，請重試</div>
+
+        <button type="button" class="back-home-btn" id="backHomeBtn">← 回主頁</button>
+      </form>
+    </div>
+
+    <style>
+      .guest-button {
+        width: 100%;
+        padding: 15px;
+        background: #f0f0f0;
+        color: #333;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .guest-button:hover {
+        border-color: #ffb6c1;
+        background: #fff8fa;
+        color: #ffb6c1;
+      }
+
+      .permission-hint {
+        font-size: 12px;
+        font-weight: 400;
+        opacity: 0.7;
+      }
+
+      .divider {
+        text-align: center;
+        color: #ccc;
+        margin: 20px 0;
+        font-size: 12px;
+        position: relative;
+        display: none;
+      }
+
+      .divider::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #ccc, transparent);
+        z-index: 0;
+      }
+
+      .divider {
+        z-index: 1;
+        background: white;
+        padding: 0 10px;
+        position: relative;
+      }
+
+      #loginBtn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .back-home-btn {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #f0f0f0;
+        color: #666;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .back-home-btn:hover {
+        background: #e8e8e8;
+        border-color: #999;
+      }
+    </style>
+
+    <script>
+      const VIEWER_PASSWORD = 'hlc*0930';     // 一階檢視者密碼
+      const ADMIN_PASSWORD = 'hlc*1373';      // 管理員密碼
+      const PASSWORD_STORAGE_KEY = 'hlc_authenticated';
+      const USER_TYPE_KEY = 'hlc_user_type';
+      const ROLE_PERMISSIONS_KEY = 'hlc_role_permissions';
+      
+      // 預設身份權限（與 access-control.js 保持一致）
+      const DEFAULT_PERMISSIONS = {
+        'guest': ['index.html', 'about.html'],
+        'viewer': ['index.html','search.html', 'about.html','maxmsp.html','touchdesigner.html', 'performance-records.html', 'cloud-dreams.html', 'projects.html', 'arduino-sensor.html'],
+        'admin': ['index.html','search.html', 'about.html','maxmsp.html','touchdesigner.html', 'performance-records.html', 'portfolio.html', 'projects.html', 'cloud-dreams.html', 'arduino-sensor.html']
+      };
+
+      // 如果已登入為檢視者或管理員（不是訪客）且沒有待辦的重新登入請求，重定向到首頁
+      const userType = localStorage.getItem(USER_TYPE_KEY);
+      if (localStorage.getItem(PASSWORD_STORAGE_KEY) && (userType === 'viewer' || userType === 'admin') && !sessionStorage.getItem('loginReferrer')) {
+        window.location.href = './index.html';
+      }
+
+      const passwordInput = document.getElementById('password');
+      const loginBtn = document.getElementById('loginBtn');
+      const guestBtn = document.getElementById('guestBtn');
+
+      // 防止用戶離開登入頁面之前的操作
+      let isSubmitting = false;
+
+      // 密碼輸入表單提交
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // 防止重複提交
+        if (isSubmitting || loginBtn.disabled) {
+          return;
+        }
+
+        isSubmitting = true;
+        loginBtn.disabled = true;
+        
+        const password = passwordInput.value.trim();
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // 如果沒有輸入密碼，作為訪客登入
+        if (password === '') {
+          // 設定為訪客身份
+          localStorage.setItem(PASSWORD_STORAGE_KEY, 'true');
+          localStorage.setItem(USER_TYPE_KEY, 'guest');
+          // 初始化預設權限
+          localStorage.setItem(ROLE_PERMISSIONS_KEY, JSON.stringify(DEFAULT_PERMISSIONS));
+          
+          // 重定向到首頁或引薦頁面
+          const referrer = sessionStorage.getItem('loginReferrer');
+          if (referrer) {
+            sessionStorage.removeItem('loginReferrer');
+            // 小延遲確保localStorage已保存
+            setTimeout(() => {
+              window.location.href = referrer;
+            }, 100);
+          } else {
+            window.location.href = './index.html';
+          }
+          return;
+        }
+
+        let userTypeGuess = null;
+        let isCorrect = false;
+
+        // 檢測密碼
+        if (password === VIEWER_PASSWORD) {
+          isCorrect = true;
+          userTypeGuess = 'viewer';
+        } else if (password === ADMIN_PASSWORD) {
+          isCorrect = true;
+          userTypeGuess = 'admin';
+        }
+
+        if (isCorrect) {
+          // 設定登入狀態
+          localStorage.setItem(PASSWORD_STORAGE_KEY, 'true');
+          localStorage.setItem(USER_TYPE_KEY, userTypeGuess);
+          // 初始化預設權限
+          localStorage.setItem(ROLE_PERMISSIONS_KEY, JSON.stringify(DEFAULT_PERMISSIONS));
+          
+          // 清除之前可能的引薦 URL
+          const referrer = sessionStorage.getItem('loginReferrer');
+          if (referrer) {
+            sessionStorage.removeItem('loginReferrer');
+            // 小延遲確保localStorage已保存
+            setTimeout(() => {
+              window.location.href = referrer;
+            }, 100);
+          } else {
+            window.location.href = './index.html';
+          }
+        } else {
+          isSubmitting = false;
+          loginBtn.disabled = false;
+          errorMessage.classList.add('show');
+          passwordInput.value = '';
+          passwordInput.focus();
+          
+          // 3秒後隱藏錯誤訊息
+          setTimeout(() => {
+            errorMessage.classList.remove('show');
+          }, 3000);
+        }
+      });
+
+      // Enter 鍵提交
+      passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        }
+      });
+
+      // 回主頁按鈕
+      document.getElementById('backHomeBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = './index.html';
+      });
+    </script>
+  </body>
+</html>

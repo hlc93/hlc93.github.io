@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>搜尋結果 | 陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <style>
+      body {
+        background-color: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      * { margin: 0; padding: 0; border: 0; }
+
+      html { scroll-behavior: smooth; }
+
+      .site-header,
+      .site-header.dark-bg {
+        background-color: rgba(0,0,0,0.7) !important;
+        background: rgba(0,0,0,0.7) !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 20px !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+
+      .site-header * {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-decoration: none !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #ffffff !important;
+        background: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover { color: #cccccc !important; }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+      }
+
+      .admin-btn, .login-btn, .logout-link {
+        color: #ffffff !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .site-header-toggle { display: none !important; }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu { display: none !important; }
+        .site-header-toggle { display: flex !important; }
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu.is-open {
+          background: rgba(0,0,0,0.9) !important;
+        }
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 20px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border: none !important;
+          color: #ffffff !important;
+          font-size: 13px !important;
+        }
+        .site-header .site-menu.is-open #login-button-container,
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          gap: 0 !important;
+        }
+      }
+
+      .site-main {
+        margin-top: 60px;
+        padding: 60px 20px;
+        min-height: calc(100vh - 120px);
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .search-header {
+        margin-bottom: 40px;
+      }
+
+      .search-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+      }
+
+      .search-bar {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .search-input {
+        flex: 1;
+        padding: 12px 16px !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 8px !important;
+        font-size: 16px !important;
+        color: #1a1a1a !important;
+        outline: none;
+        box-sizing: border-box !important;
+        min-height: unset !important;
+        height: auto !important;
+        transition: border-color 0.3s ease;
+      }
+
+      .search-input:focus {
+        border-color: #1a1a1a !important;
+      }
+
+      .search-btn {
+        padding: 12px 24px !important;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-size: 15px !important;
+        font-weight: 600;
+        cursor: pointer !important;
+        min-height: unset !important;
+        height: auto !important;
+        transition: background 0.3s ease;
+      }
+
+      .search-btn:hover {
+        background: #333333 !important;
+      }
+
+      .results-count {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 24px;
+      }
+
+      .result-card {
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        padding: 24px;
+        margin-bottom: 16px;
+        text-decoration: none;
+        display: block;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      }
+
+      .result-card:hover {
+        border-color: #1a1a1a;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        transform: translateY(-1px);
+      }
+
+      .result-category {
+        font-size: 11px;
+        font-weight: 700;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .result-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 6px;
+      }
+
+      .result-desc {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+
+      .result-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .result-tag {
+        font-size: 11px;
+        color: #888;
+        background: #f5f5f5;
+        padding: 3px 8px;
+        border-radius: 12px;
+      }
+
+      .result-tag.highlight {
+        background: #1a1a1a;
+        color: #fff;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 80px 20px;
+        color: #aaa;
+      }
+
+      .no-results p:first-child {
+        font-size: 40px;
+        margin-bottom: 16px;
+      }
+
+      .no-results p:last-child {
+        font-size: 16px;
+      }
+
+      .site-footer {
+        background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%);
+        color: #888;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header dark-bg">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="./portfolio.html">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link" href="./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+
+    <div class="site-main">
+      <div class="container">
+        <div class="search-header">
+          <h1>搜尋</h1>
+          <div class="search-bar">
+            <input class="search-input" id="searchInput" placeholder="輸入曲名、媒材、年份、關鍵字…" type="text" />
+            <button class="search-btn" onclick="doSearch()">搜尋</button>
+          </div>
+        </div>
+
+        <div id="resultsCount" class="results-count" style="display:none;"></div>
+        <div id="results"></div>
+        <div class="no-results" id="noResults" style="display:none;">
+          <p>🔍</p>
+          <p>找不到符合的結果，試試其他關鍵字</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 HONGLIN CHEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const DATABASE = [
+        // 表演紀錄
+        {
+          title: '樂旅竹塹 竹區四校聯合成發',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-1',
+          desc: '2024年6月，四校聯合國樂成發演出。擔任打擊、古箏。',
+          tags: ['2024', '國樂', '成發', '茉莉花', '劉文金', '印象國樂', '姜瑩', '藍色的思念', '關迺忠', '打擊', '古箏']
+        },
+        {
+          title: '竹中國樂成發 2024',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-2',
+          desc: '2024年6月，竹中國樂成發。擔任打擊、古箏、鋼琴伴奏。',
+          tags: ['2024', '國樂', '成發', '太陽的兒子', '張列', '鈴芽之旅', '菊次郎的夏天', '久石讓', '戰颱風', '王昌元', '地球儀', '打擊', '古箏', '鋼琴伴奏']
+        },
+        {
+          title: '竹中合唱成發 2024',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-3',
+          desc: '2024年5月，竹中合唱成發。擔任鋼琴伴奏。',
+          tags: ['2024', '合唱', '成發', 'Billie Eilish', 'What Was I Made For', 'John Rutter', 'Salley Gardens', 'Miller of Dee', '鋼琴伴奏']
+        },
+        {
+          title: '112全國學生音樂比賽 決賽',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-4',
+          desc: '2024年3月，全國學生音樂比賽決賽。擔任古箏。',
+          tags: ['2024', '比賽', '國樂', '中華風', '王乙聿', '香包調', '關迺忠', '古箏']
+        },
+        {
+          title: '112全國學生音樂比賽 初賽',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-5',
+          desc: '2023年11月，全國學生音樂比賽初賽。擔任古箏。',
+          tags: ['2023', '比賽', '國樂', '中華風', '王乙聿', '香包調', '關迺忠', '古箏']
+        },
+        {
+          title: '竹中國樂成發 2023',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-6',
+          desc: '2023年6月，竹中國樂成發。擔任打擊、古箏、鋼琴伴奏。',
+          tags: ['2023', '國樂', '成發', '龍騰虎躍', '李民雄', '雪落下的聲音', '阿里山的姑娘', '高佳', '絲竹交響', '劉長遠', '七彩之和', '張朝', '打擊', '古箏', '鋼琴伴奏']
+        },
+        {
+          title: '竹中合唱成發 2023',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-7',
+          desc: '2023年6月，竹中合唱成發。擔任鋼琴伴奏。',
+          tags: ['2023', '合唱', '成發', '花樹下', '謝宇威', '蔡昱姍', 'Pura Vida', 'Wakati Wa Amani', '鋼琴伴奏']
+        },
+        {
+          title: '111全國學生音樂比賽 決賽',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-8',
+          desc: '2023年3月，全國學生音樂比賽決賽。擔任打擊。',
+          tags: ['2023', '比賽', '國樂', '臺灣追想曲', '蘇文慶', '七彩之和', '張朝', '打擊']
+        },
+        {
+          title: '111全國學生音樂比賽 初賽',
+          category: '表演紀錄',
+          url: './performance-records.html#perf-9',
+          desc: '2022年12月，全國學生音樂比賽初賽。擔任打擊。',
+          tags: ['2022', '比賽', '國樂', '臺灣追想曲', '蘇文慶', '七彩之和', '張朝', '打擊']
+        },
+        // 作品
+        {
+          title: '德布西 月光 — 雲端夢境',
+          category: 'Blender 動畫',
+          url: './cloud-dreams.html',
+          desc: '以 Blender 製作的 3D 動畫視覺實驗，靈感來自德布西印象派鋼琴作品《月光》。',
+          tags: ['Blender', '3D', '動畫', '德布西', '月光', 'Clair de Lune', '視覺', '雲端夢境']
+        },
+        {
+          title: '教授對不起 — Arduino 感測裝置',
+          category: 'Arduino 互動裝置',
+          url: './arduino-sensor.html',
+          desc: '把期末精神崩潰實體化的惡搞音樂遊戲，以紅外線測距器與光敏電阻製作。',
+          tags: ['Arduino', '感測器', '音樂遊戲', '紅外線', '光敏電阻', 'TouchDesigner', '惡搞', '期末', '教授對不起'],
+          searchOnly: ['td']
+        },
+        {
+          title: '浮游 Floating — 大一下專題',
+          category: '專題紀錄',
+          url: './projects.html',
+          desc: '探討「自我存在」的音像互動作品，以水波意象映射迷茫與不安。媒材：TouchDesigner、Arduino、馬林巴。',
+          tags: ['專題', '大一', '浮游', 'Floating', '馬林巴', '打擊', 'TouchDesigner', 'Arduino', 'DaVinci', '音像互動'],
+          searchOnly: ['td']
+        },
+        {
+          title: '加法合成器 — MAX/MSP',
+          category: 'MAX/MSP 音訊設計',
+          url: './maxmsp.html',
+          desc: '利用加法合成原理，將基音與前 20 個泛音疊加，透過滑桿即時控制音色變化。',
+          tags: ['MAX', 'MSP', 'MAX/MSP', '音訊', '合成器', '加法合成', '泛音', '鋼琴', '音色']
+        },
+        {
+          title: 'Rehearsal — TouchDesigner',
+          category: 'TouchDesigner 錄像作品',
+          url: './touchdesigner.html',
+          desc: '以「錯誤」為主體的錄像作品，素材取自練琴過程中彈錯、停頓、重來的片段。',
+          tags: ['TouchDesigner', '錄像', '錯誤', '練琴', '聲音', 'Rehearsal', '練習曲', '失誤'],
+          searchOnly: ['td']
+        },
+      ];
+
+      function doSearch() {
+        const q = document.getElementById('searchInput').value.trim().toLowerCase();
+        const resultsDiv = document.getElementById('results');
+        const countDiv = document.getElementById('resultsCount');
+        const noResults = document.getElementById('noResults');
+
+        if (!q) {
+          resultsDiv.innerHTML = '';
+          countDiv.style.display = 'none';
+          noResults.style.display = 'none';
+          return;
+        }
+
+        const matched = DATABASE.filter(item => {
+          const searchOnly = item.searchOnly || [];
+          const searchText = [item.title, item.category, item.desc, ...item.tags, ...searchOnly].join(' ').toLowerCase();
+          return searchText.includes(q);
+        });
+
+        resultsDiv.innerHTML = '';
+        noResults.style.display = 'none';
+
+        if (matched.length === 0) {
+          countDiv.style.display = 'none';
+          noResults.style.display = 'block';
+          return;
+        }
+
+        countDiv.style.display = 'block';
+        countDiv.textContent = `找到 ${matched.length} 筆結果`;
+
+        matched.forEach(item => {
+          const card = document.createElement('a');
+          card.className = 'result-card';
+          card.href = item.url;
+
+          const highlightedTags = item.tags.map(tag => {
+            const isMatch = tag.toLowerCase().includes(q);
+            return `<span class="result-tag${isMatch ? ' highlight' : ''}">${tag}</span>`;
+          }).join('');
+
+          card.innerHTML = `
+            <div class="result-category">${item.category}</div>
+            <div class="result-title">${item.title}</div>
+            <div class="result-desc">${item.desc}</div>
+            <div class="result-tags">${highlightedTags}</div>
+          `;
+          resultsDiv.appendChild(card);
+        });
+      }
+
+      // Enter 鍵觸發搜尋
+      document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('searchInput');
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') doSearch();
+        });
+
+        // 從首頁帶過來的搜尋詞
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        if (q) {
+          input.value = q;
+          doSearch();
+        }
+      });
+    </script>
+    <script src="./js/site.js"></script>
+  </body>
+</html>

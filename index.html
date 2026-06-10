@@ -622,7 +622,7 @@
       </video>
       <div class="site-banner-bg"></div>
       <div class="site-banner-content">
-        <h1 class="title">聲響實驗計畫</h1>
+        <h1 class="title">聲響之間</h1>
       </div>
       <div class="site-banner-form">
         <div class="container">
@@ -630,24 +630,26 @@
             <div class="col-xs-8">
               <input
                 class="form-element"
-                placeholder="名稱、媒材、展覽或年份"
+                id="bannerSearch"
+                placeholder="輸入曲名、媒材、年份、關鍵字…"
                 type="text"
               />
             </div>
             <div class="col-xs-4">
-              <input class="button button-pink" type="submit" value="搜尋" />
+              <input class="button button-pink" type="button" value="搜尋" onclick="goSearch()" />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="site-main">
-      <div class="container">
+    <div class="site-main" style="position:relative;z-index:1;">
+    <canvas id="particle-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;"></canvas>
+      <div class="container" style="position:relative;z-index:3;">
         <div class="section-header text-center">
           <h2 class="title">
-            <div class="section-title">聲音感知計畫</div>
+            <div class="section-title">有形之聲</div>
             <div class="title-sub">
-              擷取實體環境與器樂聲響的動態資料，透過數位媒介將隱形的聽覺波形轉譯為可視的空間感知。
+              從器樂的振動到空間的餘響，聲音在這裡脫離聽覺，成為可以被看見的形狀。
             </div>
           </h2>
         </div>
@@ -679,7 +681,7 @@
             </a>
           </div>
           <div class="col-sm-4">
-            <a href="./touchdesigner-interactive.html" style="text-decoration: none; display: block;">
+            <a href="./touchdesigner.html" style="text-decoration: none; display: block;">
               <div class="card">
                 <img
                   alt="新媒體藝術作品示意影像"
@@ -698,7 +700,7 @@
           <h2 class="title">
             <div class="section-title">作品系列</div>
             <div class="title-sub">
-              在機械運作、資料身體與雲端夢境之間，展開對當代數位生態與技術詩學的複合式現地感知。
+              在世界的縫隙裡，尋找尚未被命名的感知。
             </div>
           </h2>
         </div>
@@ -768,14 +770,14 @@
         </div>
         <div class="row card-grid">
           <div class="col-sm-4">
-            <a href="./sensor-theater.html" style="text-decoration: none; display: block;">
+            <a href="./maxmsp.html" style="text-decoration: none; display: block;">
               <div class="card">
                 <img
                   alt="新媒體藝術作品示意影像"
                   class="img-fluid"
                   src="./images/10.jpeg"
                 />
-                <h2 class="card-center text-white title">感測劇場</h2>
+                <h2 class="card-center text-white title">MAX/MSP</h2>
               </div>
             </a>
           </div>
@@ -802,44 +804,7 @@
           </div>
         </div>
       </div>
-      <div class="divider-section"></div>
-      <div class="section-header text-center">
-        <h2 class="title">介面詩學</h2>
-      </div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="card">
-              <img
-                alt="新媒體藝術作品示意影像"
-                class="img-fluid"
-                src="./images/2.jpeg"
-              />
-              <h2 class="card-center text-white title"></h2>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <img
-                alt="新媒體藝術作品示意影像"
-                class="img-fluid"
-                src="./images/3.jpeg"
-              />
-              <h2 class="card-center text-white title"></h2>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <img
-                alt="新媒體藝術作品示意影像"
-                class="img-fluid"
-                src="./images/4.jpeg"
-              />
-              <h2 class="card-center text-white title"></h2>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
     <footer class="site-footer dark-bg">
       <div class="container site-footer-inner">
@@ -932,6 +897,24 @@
         }
       });
 
+      function goSearch() {
+        const q = document.getElementById('bannerSearch').value.trim();
+        if (q) {
+          window.location.href = './search.html?q=' + encodeURIComponent(q);
+        } else {
+          window.location.href = './search.html';
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('bannerSearch');
+        if (input) {
+          input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') goSearch();
+          });
+        }
+      });
+
       // 平滑連結點擊
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -944,6 +927,127 @@
           }
         });
       });
+    </script>
+
+    <script>
+      (function() {
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = 0, H = 0;
+        let mouse = { x: -999, y: -999 };
+        const MAX = 300;
+        let particles = [];
+
+        function makeParticle() {
+          return {
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            r: 2.5 + Math.random() * 3,
+            alpha: 0,
+            maxAlpha: 0.01 + Math.random() * 0.07,
+            state: 'in',
+            life: 0,
+            maxLife: 800 + Math.random() * 1000
+          };
+        }
+
+        function resize() {
+          const main = document.querySelector('.site-main');
+          W = main.offsetWidth;
+          H = main.scrollHeight;
+          canvas.width = Math.floor(W * devicePixelRatio);
+          canvas.height = Math.floor(H * devicePixelRatio);
+          canvas.style.width = W + 'px';
+          canvas.style.height = H + 'px';
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+
+        function init() {
+          resize();
+          particles = Array.from({length: MAX}, () => {
+            const p = makeParticle();
+            p.alpha = p.maxAlpha * Math.random();
+            p.state = 'hold';
+            p.life = Math.floor(Math.random() * p.maxLife);
+            return p;
+          });
+          drawParticles();
+        }
+
+        window.addEventListener('mousemove', e => {
+          const main = document.querySelector('.site-main');
+          const mainTop = main.getBoundingClientRect().top + window.scrollY;
+          mouse.x = e.pageX - main.getBoundingClientRect().left;
+          mouse.y = e.pageY - mainTop;
+        });
+        window.addEventListener('blur', () => { mouse.x = -999; mouse.y = -999; });
+        window.addEventListener('resize', resize);
+
+        function drawParticles() {
+          ctx.clearRect(0, 0, W, H);
+
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            const dx = p.x - mouse.x, dy = p.y - mouse.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 80 && dist > 0) {
+              const force = (80 - dist) / 80;
+              p.vx += (dx / dist) * force * 0.06;
+              p.vy += (dy / dist) * force * 0.06;
+            }
+            const speed = Math.sqrt(p.vx*p.vx + p.vy*p.vy);
+            if (speed > 1.2) { p.vx = p.vx/speed*1.2; p.vy = p.vy/speed*1.2; }
+            p.vx *= 0.995; p.vy *= 0.995;
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0) p.x = W;
+            if (p.x > W) p.x = 0;
+            if (p.y < 0) p.y = H;
+            if (p.y > H) p.y = 0;
+
+            p.life++;
+            if (p.state === 'in') {
+              p.alpha += 0.0015;
+              if (p.alpha >= p.maxAlpha) { p.alpha = p.maxAlpha; p.state = 'hold'; }
+            } else if (p.state === 'hold') {
+              if (p.life > p.maxLife) p.state = 'out';
+            } else if (p.state === 'out') {
+              p.alpha -= 0.001;
+              if (p.alpha <= 0) particles[i] = makeParticle();
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fillStyle = `rgba(60,60,70,${p.alpha})`;
+            ctx.fill();
+          }
+
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i+1; j < particles.length; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const d = Math.sqrt(dx*dx + dy*dy);
+              if (d < 180) {
+                const a = Math.min(particles[i].alpha, particles[j].alpha) * (1 - d/180) * 0.7;
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(60,60,70,${a})`;
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+          requestAnimationFrame(drawParticles);
+        }
+
+        if (document.readyState === 'complete') {
+          init();
+        } else {
+          window.addEventListener('load', init);
+        }
+      })();
     </script>
   </body>
 </html>

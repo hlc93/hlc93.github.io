@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>MAX/MSP 音訊設計 | 陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <style>
+      body {
+        background-color: #f3e5f5 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      * { margin: 0; padding: 0; border: 0; }
+
+      html {
+        scroll-behavior: smooth;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      .site-main, .site-footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      .site-header,
+      .site-header.dark-bg {
+        background-color: transparent !important;
+        background: transparent !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 20px !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        transition: background-color 0.6s ease !important;
+      }
+
+      .site-header * {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-decoration: none !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #ffffff !important;
+        background: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover,
+      .site-header .site-header-toggle:hover {
+        color: #ce93d8 !important;
+      }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .admin-btn, .login-btn, .logout-link {
+        color: #ffffff !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: color 0.3s ease !important;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .admin-btn:hover, .login-btn:hover, .logout-link:hover {
+        color: #ce93d8 !important;
+      }
+
+      .site-header-toggle {
+        display: none !important;
+      }
+
+      .site-header.scrolled {
+        background-color: rgba(50, 10, 70, 0.85) !important;
+        background: rgba(50, 10, 70, 0.85) !important;
+      }
+
+      .site-header.scrolled .nav-link:hover {
+        color: #ce93d8 !important;
+      }
+
+      @media (min-width: 993px) {
+        .site-header .site-menu { display: flex !important; }
+        .site-header-toggle { display: none !important; }
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu { display: none !important; }
+        .site-header-toggle { display: flex !important; }
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu.is-open {
+          background: transparent !important;
+          transition: background 0.6s ease;
+        }
+        .site-header.scrolled .site-menu.is-open {
+          background: rgba(50, 10, 70, 0.85) !important;
+        }
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          max-height: none !important;
+          line-height: 1.4 !important;
+          padding: 20px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border: none !important;
+          color: #ffffff !important;
+          font-size: 13px !important;
+        }
+        .site-header .site-menu.is-open #login-button-container {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+
+      .site-main {
+        padding: 60px 20px !important;
+        background: transparent !important;
+        margin-top: 60px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: #7b1fa2;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover { color: #4a0072; }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding-bottom: 40px;
+        border-bottom: 2px solid #ce93d8;
+      }
+
+      .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #2a0a3a;
+        margin-bottom: 15px;
+      }
+
+      .page-header p {
+        font-size: 18px;
+        color: #7b4a8a;
+      }
+
+      .performance-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        border-radius: 8px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 16px rgba(150, 60, 200, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .performance-card:hover {
+        box-shadow: 0 4px 24px rgba(150, 60, 200, 0.25);
+        transform: translateY(-2px);
+      }
+
+      .performance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e1bee7;
+      }
+
+      .performance-date {
+        font-size: 14px;
+        color: #9c6aaa;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .performance-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #2a0a3a;
+        margin: 10px 0 5px 0;
+      }
+
+      .performance-title-en {
+        font-size: 16px;
+        color: #999;
+        font-weight: 400;
+        margin-bottom: 8px;
+        letter-spacing: 0.05em;
+      }
+
+      .performance-organization {
+        font-size: 14px;
+        color: #7b4a8a;
+        margin-bottom: 20px;
+      }
+
+      .youtube-container {
+        width: 100%;
+        margin-bottom: 30px;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+      }
+
+      .youtube-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .song-video { margin-bottom: 30px; }
+
+      .video-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2a0a3a;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #ce93d8;
+      }
+
+      .songs-section { margin-bottom: 24px; }
+
+      .songs-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2a0a3a;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #ce93d8;
+      }
+
+      .songs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .songs-list li {
+        padding: 8px 0 8px 30px;
+        color: #5a2a6a;
+        font-size: 14px;
+        position: relative;
+        line-height: 1.6;
+      }
+
+      .songs-list li:before {
+        content: '✦';
+        position: absolute;
+        left: 10px;
+        color: #ce93d8;
+        font-weight: bold;
+      }
+
+      .role-badge {
+        display: inline-block;
+        background: #ce93d8;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 4px;
+      }
+
+      .role-badge.secondary { background: #ab47bc; }
+
+      .description-text {
+        font-size: 15px;
+        color: #5a2a6a;
+        line-height: 1.9;
+        letter-spacing: 0.02em;
+        padding: 20px;
+        background: #fce4ec;
+        border-radius: 6px;
+        border-left: 3px solid #ce93d8;
+      }
+
+      .site-footer {
+        background: linear-gradient(135deg, rgba(50, 10, 70, 0.95) 0%, rgba(30, 5, 50, 0.9) 100%);
+        color: #ce93d8;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="glitch-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+    <header class="site-header dark-bg">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="./portfolio.html">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link active" href="./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+
+    <div class="site-main">
+      <div class="container">
+
+        <a class="back-link" href="./index.html">← 返回主頁</a>
+
+        <div class="page-header">
+          <h1>MAX/MSP 音訊設計</h1>
+          <p>以程式語言構築聲音的結構與邏輯</p>
+        </div>
+
+        <!-- 作品：加法合成器 -->
+        <div class="performance-card">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">MAX/MSP 音訊設計</div>
+              <h2 class="performance-title">加法合成器</h2>
+              <p class="performance-title-en">Additive Synthesizer</p>
+              <p class="performance-organization">MAX/MSP</p>
+            </div>
+            <div>
+              <span class="role-badge">音訊合成</span>
+              <span class="role-badge secondary">互動介面</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">作品影片</h4>
+            <div class="youtube-container">
+              <iframe
+                src="https://www.youtube.com/embed/evx_2SUMb8A"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">作品說明</h3>
+            <p class="description-text">
+              這個作品利用加法合成（Additive Synthesis）的原理，將一個基音與其前 20 個泛音疊加，透過一個滑桿即時控制各泛音的音量分佈，使音色在滑桿移動過程中產生連續變化。使用者可以透過鋼琴鍵盤選擇音高，再用滑桿「掃過」泛音列，從純淨的基音逐漸過渡到富含高次泛音的複雜音色，模擬真實樂器音色變化的物理原理。
+            </p>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">技術細節</h3>
+            <ul class="songs-list">
+              <li>加法合成（Additive Synthesis）：基音 + 前 20 個泛音疊加</li>
+              <li>滑桿即時控制各泛音音量分佈，音色連續變化</li>
+              <li>鋼琴鍵盤介面選擇音高</li>
+              <li>模擬真實樂器音色變化的物理原理</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 HONGLIN CHEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      header.classList.add('scrolled');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script src="./js/site.js"></script>
+
+    <script>
+      (function() {
+        const canvas = document.getElementById('glitch-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = window.innerWidth, H = window.innerHeight;
+
+        function resize() {
+          W = window.innerWidth; H = window.innerHeight;
+          canvas.width = Math.floor(W * devicePixelRatio);
+          canvas.height = Math.floor(H * devicePixelRatio);
+          canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        let mouse = { x: -999, y: -999, px: -999, py: -999, speed: 0 };
+        window.addEventListener('mousemove', e => {
+          mouse.px = mouse.x; mouse.py = mouse.y;
+          mouse.x = e.clientX; mouse.y = e.clientY + window.scrollY;
+          mouse.speed = Math.hypot(mouse.x - mouse.px, mouse.y - mouse.py);
+        });
+        window.addEventListener('blur', () => { mouse.x = -999; mouse.speed = 0; });
+
+        let t = 0;
+        let nextGlitch = 150 + Math.random() * 300;
+        let glitchBlocks = [];
+        let staticNoise = 0;
+        let lastThickLine = -999;
+        let lastThinLine = -999;
+        let mouseGlitchCooldown = 0;
+
+        function scheduleGlitch(intensity) {
+          const n = Math.floor(1 + (intensity || 1) * 4);
+          const range = intensity ? H : null;
+          for (let i = 0; i < n; i++) {
+            const y = intensity
+              ? mouse.y - window.scrollY + (Math.random() - 0.5) * 120
+              : Math.random() * H;
+            glitchBlocks.push({
+              y, h: (1 + Math.random() * 12) * (intensity ? intensity * 2 : 1),
+              offset: (Math.random() - 0.5) * (intensity ? intensity * 120 : 40),
+              life: 2 + Math.floor(Math.random() * (intensity ? 8 : 4)),
+              age: 0, hue: Math.random() < 0.5 ? 280 : 190,
+              big: !!intensity
+            });
+          }
+          if (!intensity) {
+            staticNoise = 0.6 + Math.random() * 0.4;
+            nextGlitch = 200 + Math.random() * 400;
+          } else {
+            staticNoise = Math.min(1, staticNoise + intensity * 0.8);
+          }
+        }
+
+        function noise(x, y, t) {
+          return (
+            Math.sin(x * 0.016 + t * 0.01) * Math.cos(y * 0.013 - t * 0.008) +
+            Math.sin(x * 0.009 + y * 0.012 + t * 0.006) * 0.7 +
+            Math.cos(x * 0.02 - y * 0.008 + t * 0.005) * 0.4
+          ) / 2.1;
+        }
+
+        const off = document.createElement('canvas');
+        off.width = Math.ceil(W / 3); off.height = Math.ceil(H / 3);
+        const octx = off.getContext('2d');
+
+        function drawBg() {
+          const iw = off.width, ih = off.height;
+          const img = octx.createImageData(iw, ih);
+          const d = img.data;
+          for (let py = 0; py < ih; py++) {
+            for (let px = 0; px < iw; px++) {
+              const x = px * 3, y = py * 3;
+              const n = (noise(x, y, t) + 1) * 0.5;
+              const n2 = (noise(x * 1.4 + 30, y * 0.9, t * 0.7) + 1) * 0.5;
+              const v = n * 0.65 + n2 * 0.35;
+              const idx = (py * iw + px) * 4;
+              d[idx]   = Math.floor(222 + v * 24);
+              d[idx+1] = Math.floor(202 + v * 18);
+              d[idx+2] = Math.floor(230 + v * 20);
+              d[idx+3] = 255;
+            }
+          }
+          octx.putImageData(img, 0, 0);
+          ctx.imageSmoothingEnabled = true;
+          ctx.drawImage(off, 0, 0, W, H);
+        }
+
+        function draw() {
+          drawBg();
+
+          // 自動 glitch
+          if (t >= nextGlitch) scheduleGlitch();
+
+          // 滑鼠快速移動觸發大 glitch
+          if (mouse.speed > 15 && mouseGlitchCooldown <= 0) {
+            const intensity = Math.min(1, mouse.speed / 40);
+            scheduleGlitch(intensity);
+            mouseGlitchCooldown = 20 + Math.floor(Math.random() * 20);
+          }
+          if (mouseGlitchCooldown > 0) mouseGlitchCooldown--;
+          mouse.speed *= 0.8;
+
+          // glitch 區塊
+          for (let i = glitchBlocks.length - 1; i >= 0; i--) {
+            const b = glitchBlocks[i];
+            b.age++;
+            if (b.age > b.life) { glitchBlocks.splice(i, 1); continue; }
+            const frac = 1 - b.age / b.life;
+            try {
+              const screenY = b.y;
+              const sy = Math.max(0, Math.floor(screenY));
+              const sh = Math.min(Math.ceil(b.h), H - sy);
+              if (sh > 0) {
+                const src = ctx.getImageData(0, sy, W, sh);
+                ctx.putImageData(src, b.offset, sy);
+                ctx.globalAlpha = frac * (b.big ? 0.35 : 0.2);
+                ctx.fillStyle = `hsla(${b.hue}, 55%, 68%, 0.5)`;
+                ctx.fillRect(b.offset - 2, sy, W, sh);
+                if (b.big) {
+                  ctx.fillStyle = `hsla(${b.hue + 50}, 60%, 65%, 0.3)`;
+                  ctx.fillRect(b.offset + 4, sy, W, sh);
+                }
+                ctx.globalAlpha = 1;
+              }
+            } catch(e) {}
+          }
+
+          staticNoise *= 0.9;
+          if (staticNoise > 0.05) {
+            const count = Math.floor(staticNoise * 40);
+            for (let i = 0; i < count; i++) {
+              ctx.fillStyle = `rgba(120,40,170,${Math.random() * staticNoise * 0.1})`;
+              ctx.fillRect(Math.random() * W, Math.random() * H, 1, 1);
+            }
+          }
+
+          if (Math.random() < 0.0003 && t - lastThinLine > 300) {
+            lastThinLine = t;
+            ctx.globalAlpha = 0.05;
+            ctx.fillStyle = 'rgba(160,80,220,0.5)';
+            ctx.fillRect(0, Math.random() * H, W, 1);
+            ctx.globalAlpha = 1;
+          }
+
+          if (Math.random() < 0.0002 && t - lastThickLine > 500) {
+            lastThickLine = t;
+            ctx.globalAlpha = 0.07 + Math.random() * 0.06;
+            ctx.fillStyle = 'rgba(140,60,210,0.6)';
+            ctx.fillRect(0, Math.random() * H, W, 5 + Math.random() * 5);
+            ctx.globalAlpha = 1;
+          }
+
+          t++;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+  </body>
+</html>

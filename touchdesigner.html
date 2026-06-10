@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>TouchDesigner 視覺設計 | 陳宏霖</title>
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/access-control.js"></script>
+    <style>
+      body {
+        background-color: #0a0a14 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+      * { margin: 0; padding: 0; border: 0; }
+
+      html {
+        scroll-behavior: smooth;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+
+
+
+      .site-main, .site-footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      .site-header,
+      .site-header.dark-bg {
+        background-color: transparent !important;
+        background: transparent !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%;
+        z-index: 1000;
+        margin: 0 !important;
+        padding: 0 20px !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        transition: background-color 0.6s ease !important;
+      }
+
+      .site-header * {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+
+      .site-logo {
+        color: #ffffff !important;
+        font-weight: 800;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-decoration: none !important;
+      }
+
+      .site-header .nav,
+      .site-header .site-menu {
+        display: flex !important;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 30px;
+      }
+
+      .site-header .nav-link,
+      .site-header .site-header-toggle {
+        color: #aaaacc !important;
+        background: transparent !important;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .site-header .nav-link:hover,
+      .site-header .site-header-toggle:hover {
+        color: #ffffff !important;
+      }
+
+      #login-button-container {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .authenticated-menu {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 60px;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .admin-btn, .login-btn, .logout-link {
+        color: #aaaacc !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: color 0.3s ease !important;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .admin-btn:hover, .login-btn:hover, .logout-link:hover {
+        color: #ffffff !important;
+      }
+
+      .site-header-toggle {
+        display: none !important;
+      }
+
+      .site-header.scrolled {
+        background-color: rgba(5, 5, 15, 0.92) !important;
+        background: rgba(5, 5, 15, 0.92) !important;
+      }
+
+      .site-header.scrolled .nav-link:hover {
+        color: #ffffff !important;
+      }
+
+      @media (min-width: 993px) {
+        .site-header .site-menu { display: flex !important; }
+        .site-header-toggle { display: none !important; }
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu { display: none !important; }
+        .site-header-toggle { display: flex !important; }
+      }
+
+      @media (max-width: 992px) {
+        .site-header .site-menu.is-open {
+          background: transparent !important;
+          transition: background 0.6s ease;
+        }
+        .site-header.scrolled .site-menu.is-open {
+          background: rgba(5, 5, 15, 0.92) !important;
+        }
+        .site-header .site-menu.is-open .nav-link,
+        .site-header .site-menu.is-open .admin-btn,
+        .site-header .site-menu.is-open .logout-link,
+        .site-header .site-menu.is-open .login-btn {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          max-height: none !important;
+          line-height: 1.4 !important;
+          padding: 20px 24px !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+          border: none !important;
+          color: #aaaacc !important;
+          font-size: 13px !important;
+        }
+        .site-header .site-menu.is-open #login-button-container {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+        .site-header .site-menu.is-open .authenticated-menu {
+          display: block !important;
+          height: auto !important;
+          min-height: unset !important;
+          gap: 0 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+
+      .site-main {
+        padding: 60px 20px !important;
+        background: transparent !important;
+        margin-top: 60px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: #6677aa;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover { color: #aaaacc; }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding-bottom: 40px;
+        border-bottom: 2px solid #2a2a4a;
+      }
+
+      .page-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #ccccee;
+        margin-bottom: 15px;
+      }
+
+      .page-header p {
+        font-size: 18px;
+        color: #6677aa;
+      }
+
+      .performance-card {
+        background: rgba(15, 15, 30, 0.85);
+        backdrop-filter: blur(8px);
+        border-radius: 8px;
+        padding: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 16px rgba(80, 80, 180, 0.12);
+        border: 1px solid #1a1a30;
+        transition: all 0.3s ease;
+      }
+
+      .performance-card:hover {
+        box-shadow: 0 4px 24px rgba(80, 80, 180, 0.2);
+        transform: translateY(-2px);
+        border-color: #2a2a50;
+      }
+
+      .performance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #1a1a30;
+      }
+
+      .performance-date {
+        font-size: 14px;
+        color: #556688;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .performance-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #ccccee;
+        margin: 10px 0 5px 0;
+      }
+
+      .performance-title-en {
+        font-size: 16px;
+        color: #556688;
+        font-weight: 400;
+        margin-bottom: 8px;
+        letter-spacing: 0.1em;
+      }
+
+      .performance-organization {
+        font-size: 14px;
+        color: #6677aa;
+        margin-bottom: 20px;
+      }
+
+      .youtube-container {
+        width: 100%;
+        margin-bottom: 30px;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+      }
+
+      .youtube-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .song-video { margin-bottom: 30px; }
+
+      .video-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #aaaacc;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #3a3a6a;
+      }
+
+      .songs-section { margin-bottom: 24px; }
+
+      .songs-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #aaaacc;
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid #3a3a6a;
+      }
+
+      .songs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .songs-list li {
+        padding: 8px 0 8px 30px;
+        color: #8888aa;
+        font-size: 14px;
+        position: relative;
+        line-height: 1.6;
+      }
+
+      .songs-list li:before {
+        content: '✦';
+        position: absolute;
+        left: 10px;
+        color: #3a3a6a;
+        font-weight: bold;
+      }
+
+      .role-badge {
+        display: inline-block;
+        background: #1a1a3a;
+        color: #aaaacc;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 4px;
+        border: 1px solid #3a3a6a;
+      }
+
+      .description-text {
+        font-size: 15px;
+        color: #8888aa;
+        line-height: 2.2;
+        letter-spacing: 0.04em;
+        padding: 24px 28px;
+        background: rgba(20, 20, 40, 0.6);
+        border-radius: 6px;
+        border-left: 3px solid #3a3a6a;
+        white-space: pre-line;
+      }
+
+      .site-footer {
+        background: linear-gradient(135deg, rgba(5, 5, 15, 0.98) 0%, rgba(10, 10, 25, 0.95) 100%);
+        color: #556688;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid #1a1a30;
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="star-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+    <header class="site-header dark-bg">
+      <a href="./index.html" class="site-logo" style="text-decoration: none; color: inherit;">HONGLIN CHEN</a>
+      <a class="pull-right site-header-toggle" href="#">☰</a>
+      <nav class="nav site-menu pull-right">
+        <a class="nav-link" href="./about.html">關於藝術家</a>
+        <a class="nav-link" href="./portfolio.html">作品集</a>
+        <a class="nav-link" href="./performance-records.html">表演紀錄</a>
+        <a class="nav-link active" href="./projects.html">專題紀錄</a>
+        <div id="login-button-container"></div>
+      </nav>
+    </header>
+
+    <div class="site-main">
+      <div class="container">
+
+        <a class="back-link" href="./index.html">← 返回主頁</a>
+
+        <div class="page-header">
+          <h1>TouchDesigner 視覺設計</h1>
+          <p>以即時視覺運算構築感知與時間的裝置</p>
+        </div>
+
+        <div class="performance-card">
+          <div class="performance-header">
+            <div>
+              <div class="performance-date">TouchDesigner 錄像作品</div>
+              <h2 class="performance-title">《Rehearsal》</h2>
+              <p class="performance-title-en">練習曲</p>
+              <p class="performance-organization">TouchDesigner</p>
+            </div>
+            <div>
+              <span class="role-badge">錄像裝置</span>
+              <span class="role-badge">聲音重組</span>
+            </div>
+          </div>
+
+          <div class="song-video">
+            <h4 class="video-title">作品影片</h4>
+            <div class="youtube-container">
+              <iframe
+                src="https://www.youtube.com/embed/FnzMicEl0Ec"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <div class="songs-section">
+            <h3 class="songs-title">作品說明</h3>
+            <p class="description-text">《Rehearsal》是一件以「錯誤」為主體的錄像作品。
+素材取自練琴過程中不斷「彈錯、停頓、重來」的片段。
+在這些被剪掉、被視為「不該存在」的時刻裡，
+藏著最真實的努力與掙扎。
+
+透過影像與聲音的堆疊，試圖呈現時間的盤旋與學習的重量。
+當錯音被反覆播放、重組、交疊成節奏，
+它們逐漸脫離「錯誤」的身分，成為新的聲音結構。
+
+這是一首由失誤組成的練習曲，一場不追求完美的表演。</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 HONGLIN CHEN. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      header.classList.add('scrolled');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    </script>
+    <script src="./js/site.js"></script>
+
+    <script>
+      (function() {
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = window.innerWidth, H = window.innerHeight;
+
+        function resize() {
+          W = window.innerWidth; H = window.innerHeight;
+          canvas.width = Math.floor(W * devicePixelRatio);
+          canvas.height = Math.floor(H * devicePixelRatio);
+          canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        let cx = W / 2, cy = H / 2;
+        let mouse = { x: -999, y: -999 };
+
+        window.addEventListener('mousemove', e => {
+          mouse.x = e.clientX; mouse.y = e.clientY;
+        });
+        window.addEventListener('blur', () => { mouse.x = -999; mouse.y = -999; });
+
+        const STARS = Array.from({length: 180}, () => ({
+          r: 20 + Math.random() * Math.max(W, H) * 0.65,
+          baseAngle: Math.random() * Math.PI * 2,
+          speed: 0.0003 + Math.random() * 0.0006,
+          size: 0.2 + Math.random() * 1.0,
+          trailLen: Math.PI * (0.03 + Math.random() * 0.12),
+          brightness: 0.3 + Math.random() * 0.7,
+          twinkle: Math.random() * Math.PI * 2,
+          colorBlend: 0
+        }));
+
+        function draw() {
+          ctx.fillStyle = 'rgba(2,2,10,0.18)';
+          ctx.fillRect(0, 0, W, H);
+
+          cx = W / 2; cy = H / 2;
+
+          for (const s of STARS) {
+            s.baseAngle -= s.speed;
+            s.twinkle += 0.025;
+            const tw = 0.7 + 0.3 * Math.sin(s.twinkle);
+            const alpha = s.brightness * tw;
+
+            const sx = cx + Math.cos(s.baseAngle) * s.r;
+            const sy = cy + Math.sin(s.baseAngle) * s.r;
+
+            const mdx = sx - mouse.x, mdy = sy - mouse.y;
+            const mdist = Math.sqrt(mdx*mdx + mdy*mdy);
+            const mouseInfluence = mouse.x !== -999 ? Math.max(0, 1 - mdist / 160) : 0;
+            s.colorBlend += (mouseInfluence - s.colorBlend) * 0.06;
+
+            const cr = Math.floor(200 + 55 * s.colorBlend);
+            const cg = Math.floor(220 + 25 * s.colorBlend);
+            const cb = Math.floor(255 - 60 * s.colorBlend);
+
+            const trailSteps = 24;
+            for (let t = 0; t <= trailSteps; t++) {
+              const frac = t / trailSteps;
+              const a = s.baseAngle + s.trailLen * (1 - frac);
+              const tx = cx + Math.cos(a) * s.r;
+              const ty = cy + Math.sin(a) * s.r;
+              ctx.beginPath();
+              ctx.arc(tx, ty, s.size * (0.2 + 0.8 * frac) * 0.4, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha * frac * 0.45})`;
+              ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.arc(sx, sy, s.size * 0.55, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha})`;
+            ctx.fill();
+
+            if (s.size > 1.2) {
+              const rl = s.size * 2.5;
+              ctx.strokeStyle = `rgba(${cr},${cg},${cb},${alpha * 0.25})`;
+              ctx.lineWidth = 0.35;
+              ctx.beginPath();
+              ctx.moveTo(sx - rl, sy); ctx.lineTo(sx + rl, sy);
+              ctx.moveTo(sx, sy - rl); ctx.lineTo(sx, sy + rl);
+              ctx.stroke();
+            }
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+  </body>
+</html>
