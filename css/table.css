@@ -1,0 +1,63 @@
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.table {
+/* 設定元素寬度，是版型與欄位比例的基礎。 */
+	width: 100%;
+/* 設定邊框。 */
+	border: 1px solid #DCDCDC;
+/* 設定 CSS 屬性 border-spacing，用來微調版面或視覺表現。 */
+	border-spacing: 0;
+/* 設定 CSS 屬性 border-collapse，用來微調版面或視覺表現。 */
+	border-collapse: separate;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.table thead {
+/* 設定 CSS 屬性 font-weight，用來微調版面或視覺表現。 */
+	font-weight: 500;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 這行是 CSS 語法的一部分，請觀察它如何影響畫面呈現。 */
+.table th,
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.table td {
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 8px 10px;
+/* 設定 CSS 屬性 border-bottom，用來微調版面或視覺表現。 */
+	border-bottom: 1px solid #DCDCDC;
+/* 設定文字水平對齊。 */
+	text-align: left;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.table th {
+/* 設定 CSS 屬性 border-bottom，用來微調版面或視覺表現。 */
+	border-bottom: 2px solid #DCDCDC;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.table tr:nth-child(even) td {
+/* 設定背景顏色，建立區塊層次與視覺識別。 */
+	background-color: #f9fafb;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.table tr:last-child td {
+/* 設定 CSS 屬性 border-bottom，用來微調版面或視覺表現。 */
+	border-bottom: none;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */

@@ -1,0 +1,83 @@
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.nav {
+/* CSS 註解，用來標示區塊目的或教學提醒。 */
+	/*預設重整*/
+/* 設定元素外距，控制元素與元素之間的距離。 */
+	margin: 0;
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 0;
+/* 設定 CSS 屬性 list-style，用來微調版面或視覺表現。 */
+	list-style: none;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.nav-number {
+/* 設定 CSS 屬性 counter-reset，用來微調版面或視覺表現。 */
+	counter-reset: number-item
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.nav-number li {
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: relative;
+/* 設定左側內距。 */
+	padding-left: 1.5em;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.nav-number li:before {
+/* 設定 CSS 屬性 content，用來微調版面或視覺表現。 */
+	content: counter(number-item);
+/* 設定 CSS 屬性 counter-increment，用來微調版面或視覺表現。 */
+	counter-increment: number-item;
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: absolute;
+/* 搭配定位使用，設定左側位移。 */
+	left: 0;
+/* 設定文字大小。 */
+	font-size: 20px;
+/* 設定 CSS 屬性 font-weight，用來微調版面或視覺表現。 */
+	font-weight: 800;
+/* 設定透明度，可用於淡入動畫。 */
+	opacity: .2
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.nav-link {/* 設定文字色為白色 */
+	color: #ffffff !important;/* CSS 註解，用來標示區塊目的或教學提醒。 */
+	/*基本內距*/
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 5px;
+/* 設定元素外距，控制元素與元素之間的距離。 */
+    margin: 0px;
+/* 空白行，用來分隔不同樣式區塊。 */
+  
+/* CSS 註解，用來標示區塊目的或教學提醒。 */
+    /*修改類型*/
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+	display: inline-block;
+/* 添加顏色過渡效果 */
+	transition: color 0.3s ease;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.nav-link:hover {
+/* 設定文字色為粉紅色 */
+	color: #ffb6c1 !important;
+/* 設定滑鼠游標樣式，提示可互動性。 */
+	cursor: pointer;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */

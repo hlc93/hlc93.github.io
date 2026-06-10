@@ -1,0 +1,82 @@
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+*, *:before, *:after {
+/* 設定盒模型計算方式，常用 border-box 讓尺寸更直覺。 */
+  box-sizing: inherit;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+html {
+/* 設定盒模型計算方式，常用 border-box 讓尺寸更直覺。 */
+  box-sizing: border-box;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+body {
+/* 設定字體家族，影響網站的氣質。 */
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+/* 設定文字大小。 */
+	font-size: 16px;
+/* 設定行高，影響段落閱讀節奏。 */
+	line-height: 1.5;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+a {
+/* 設定文字顏色。 */
+	color: #000;
+/* 設定連結底線等文字裝飾。 */
+	text-decoration: none;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+a:hover {
+/* 設定文字顏色。 */
+	color: #4ea1d3;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.img-fluid {
+/* 限制最大寬度，避免內容在大螢幕上過度拉長。 */
+	max-width: 100%;
+/* 設定元素高度。 */
+	height: auto;
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+	display: block;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.img-rounded {
+/* 設定圓角，影響卡片與按鈕的柔和程度。 */
+	border-radius: 50%;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+
+/* 恢復表單元素高度 */
+input,
+textarea,
+select {
+	padding: 8px 10px !important;
+	height: auto !important;
+	line-height: normal !important;
+	min-height: 36px;
+	border: 1px solid #ccc !important;
+	box-sizing: border-box !important;
+	max-width: 100% !important;
+}
+
+button {
+	height: auto !important;
+	line-height: normal !important;
+}

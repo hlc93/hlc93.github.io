@@ -1,0 +1,65 @@
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+* {
+/* 設定盒模型計算方式，常用 border-box 讓尺寸更直覺。 */
+  box-sizing: border-box;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+html {
+/* 設定行高，影響段落閱讀節奏。 */
+  line-height: 1.15;
+/* 設定 CSS 屬性 -webkit-text-size-adjust，用來微調版面或視覺表現。 */
+  -webkit-text-size-adjust: 100%;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+body {
+/* 設定元素外距，控制元素與元素之間的距離。 */
+  margin: 0;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+main {
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+  display: block;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+img {
+/* 限制最大寬度，避免內容在大螢幕上過度拉長。 */
+  max-width: 100%;
+/* 設定元素高度。 */
+  height: auto;
+/* 設定 CSS 屬性 vertical-align，用來微調版面或視覺表現。 */
+  vertical-align: middle;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+a {
+/* 設定文字顏色。 */
+  color: inherit;
+/* 設定連結底線等文字裝飾。 */
+  text-decoration: none;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 這行是 CSS 語法的一部分，請觀察它如何影響畫面呈現。 */
+button,
+/* 這行是 CSS 語法的一部分，請觀察它如何影響畫面呈現。 */
+input,
+/* 這行是 CSS 語法的一部分，請觀察它如何影響畫面呈現。 */
+textarea,
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+select {
+/* 設定 CSS 屬性 font，用來微調版面或視覺表現。 */
+  font: inherit;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+table {
+/* 設定 CSS 屬性 border-collapse，用來微調版面或視覺表現。 */
+  border-collapse: collapse;
+/* 設定 CSS 屬性 border-spacing，用來微調版面或視覺表現。 */
+  border-spacing: 0;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */

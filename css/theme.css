@@ -1,0 +1,378 @@
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-header {
+/* 設定背景為透明 */
+	background-color: transparent !important;
+	background: transparent !important;
+/* 設定元素寬度，是版型與欄位比例的基礎。 */
+	width: 100%;
+/* 搭配定位使用，設定上方位移。 */
+	top: 0;
+/* 搭配定位使用，設定左側位移。 */
+	left: 0;
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: fixed;
+/* 控制重疊順序，數值越高越靠上。 */
+	z-index: 1000;
+/* 添加背景色漸變效果 */
+	transition: background-color 0.6s ease !important;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-logo {
+/* 設定文字色為白色 */
+	color: #ffffff !important;
+/* 設定 CSS 屬性 text-transform，用來微調版面或視覺表現。 */
+	text-transform: uppercase;
+/* 設定 CSS 屬性 font-weight，用來微調版面或視覺表現。 */
+	font-weight: 800;
+/* 讓元素向左或向右浮動，是早期欄位排版的重要方法。 */
+	float: left;
+/* 結束目前的 CSS 樣式區堵。 */
+}
+
+/* 滾動時的導航欄樣式 */
+.site-header.scrolled {
+	background-color: rgba(0, 0, 0, 0.7) !important;
+	background: rgba(0, 0, 0, 0.7) !important;
+	transition: background-color 0.3s ease;
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 導航列項目懸停效果 */
+.site-header .nav-link {
+	color: #ffffff !important;
+	transition: color 0.3s ease;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* 導航列項目懸停時的樣式 */
+.site-header .nav-link:hover {
+	color: #ffb6c1 !important;
+}
+
+/* 滾動後的導航列懸停效果 */
+.site-header.scrolled .nav-link:hover {
+	color: #ffb6c1 !important;
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 媒體查詢，依螢幕寬度調整響應式版面。 */
+@media (max-width: 992px) {
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+	.site-menu {
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+		display: none;
+/* 結束目前的 CSS 樣式區塊。 */
+	}
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 媒體查詢，依螢幕寬度調整響應式版面。 */
+@media (min-width: 992px) {
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+	.site-header-toggle {
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+		display: none;
+/* 結束目前的 CSS 樣式區塊。 */
+	}
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 這行是 CSS 語法的一部分，請觀察它如何影響畫面呈現。 */
+.site-logo,
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-header-toggle {
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 20px 10px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner img {
+/* 設定上方外距。 */
+	margin-top: -140px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-footer {
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: relative;
+/* 控制重疊順序，數值越高越靠上。 */
+	z-index: 1;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-main {
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: relative;
+/* 控制重疊順序，數值越高越靠上。 */
+	z-index: 1;
+/* 設定上方外距，避免被固定導航欄遮擋 */
+	margin-top: 60px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* CSS 註解，用來標示區塊目的或教學提醒。 */
+/*banner*/
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner {
+/* 設定元素高度。 */
+	height: 600px;
+/* 設定元素高度。 */
+	height: 100vh;
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: relative;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 媒體查詢，依螢幕寬度調整響應式版面。 */
+@media (max-width: 992px) {
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+	.site-banner{
+/* 設定元素高度。 */
+		height: 500px;
+/* 結束目前的 CSS 樣式區塊。 */
+	}
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner-bg {
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: absolute;
+/* 搭配定位使用，設定上方位移。 */
+	top: 0;
+/* 搭配定位使用，設定下方位移。 */
+	bottom: 0;
+/* 搭配定位使用，設定左側位移。 */
+	left: 0;
+/* 搭配定位使用，設定右側位移。 */
+	right: 0;
+/* 控制重疊順序，數值越高越靠上。 */
+	z-index: -1;
+/* 控制內容超出容器時的顯示方式。 */
+	overflow: hidden;
+/* 設定背景，可包含顏色、圖片或漸層。 */
+	background: url('../images/1.jpeg') center center no-repeat;
+/* 設定 CSS 屬性 background-size，用來微調版面或視覺表現。 */
+	background-size: cover;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner-content {
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: absolute;
+/* 搭配定位使用，設定上方位移。 */
+	top: 50%;
+/* 搭配定位使用，設定左側位移。 */
+	left: 50%;
+/* 設定 CSS 屬性 min-width，用來微調版面或視覺表現。 */
+	min-width: 80%;
+/* 設定位移、縮放或旋轉，可用於動畫與動態感。 */
+	transform: translate(-50%,-50%);
+/* 設定文字顏色。 */
+	color: #fff;
+/* 設定文字水平對齊。 */
+	text-align: center;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner-content .title {
+/* 設定 CSS 屬性 text-transform，用來微調版面或視覺表現。 */
+	text-transform: uppercase;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* CSS 註解，用來標示區塊目的或教學提醒。 */
+/*site-banner-form*/
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner-form {
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: absolute;
+/* 設定背景顏色，建立區塊層次與視覺識別。 */
+	background-color: rgba(0,0,0,.3);
+/* 設定元素寬度，是版型與欄位比例的基礎。 */
+	width: 100%;
+/* 搭配定位使用，設定下方位移。 */
+	bottom: 0;
+/* 搭配定位使用，設定左側位移。 */
+	left: 0;
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 30px 0
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner-form .button {
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+	display: block;
+/* 設定元素寬度，是版型與欄位比例的基礎。 */
+	width: 100%;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-banner-form .container {
+/* 限制最大寬度，避免內容在大螢幕上過度拉長。 */
+	max-width: 800px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* CSS 註解，用來標示區塊目的或教學提醒。 */
+/*menu*/
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-menu .nav-link {
+/* 設定元素外距，控制元素與元素之間的距離。 */
+	margin: 20px 10px;
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 4px 10px;
+/* 設定文字大小。 */
+	font-size: 14px;
+/* 設定圓角，影響卡片與按鈕的柔和程度。 */
+	border-radius: 2px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-menu .nav-link.become-btn {
+/* 設定邊框。 */
+	border: 2px solid #fff;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-menu .nav-link.become-btn:hover {
+/* 設定背景顏色，建立區塊層次與視覺識別。 */
+	background-color: #fff;
+/* 設定文字顏色。 */
+	color: #000;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* CSS 註解，用來標示區塊目的或教學提醒。 */
+/*section*/
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.section-header {
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 30px 0 20px 0
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.section-title {
+/* 設定文字大小。 */
+	font-size: 36px;
+/* 設定 CSS 屬性 font-weight，用來微調版面或視覺表現。 */
+	font-weight: 800;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* CSS 註解，用來標示區塊目的或教學提醒。 */
+/*card*/
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.card-grid .card{
+/* 設定 CSS 屬性 max-height，用來微調版面或視覺表現。 */
+	max-height: 300px;
+/* 控制內容超出容器時的顯示方式。 */
+	overflow: hidden;
+/* 設定下方外距。 */
+	margin-bottom: 30px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.card-center {
+/* 設定定位方式，讓元素可進行相對、絕對或固定定位。 */
+	position: absolute;
+/* 搭配定位使用，設定上方位移。 */
+	top: 50%;
+/* 搭配定位使用，設定左側位移。 */
+	left: 50%;
+/* 設定位移、縮放或旋轉，可用於動畫與動態感。 */
+	transform: translate(-50%,-50%)
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-footer {
+/* 設定上方外距。 */
+	margin-top: 60px;
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 40px 0;
+/* 設定背景顏色，建立區塊層次與視覺識別。 */
+	background-color: #404344;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 媒體查詢，依螢幕寬度調整響應式版面。 */
+@media (max-width: 992px) {
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+	.site-footer {
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+		display: none;
+/* 結束目前的 CSS 樣式區塊。 */
+	}
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.site-footer .nav-link {
+/* 設定左側內距。 */
+	padding-left: 0;
+/* 設定右側內距。 */
+	padding-right: 0;
+/* 設定文字大小。 */
+	font-size: 13px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 空白行，用來分隔不同樣式區塊。 */

@@ -1,0 +1,40 @@
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.form-item {
+/* 設定下方外距。 */
+	margin-bottom: 15px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.form-item label {
+/* 設定下方外距。 */
+	margin-bottom: 5px;
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+	display: block;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.form-element{
+/* 設定元素寬度，是版型與欄位比例的基礎。 */
+	width: 100%;
+/* 設定邊框。 */
+	border: 1px solid #151515;
+/* 設定內距，控制內容與邊界之間的空間。 */
+	padding: 8px 10px !important;
+/* 恢復高度 */
+	height: auto !important;
+	line-height: normal !important;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+
+/* 恢復按鈕高度 */
+button,
+.button-pink {
+	padding: 8px 16px !important;
+	height: auto !important;
+	line-height: normal !important;
+	min-height: 36px;
+}

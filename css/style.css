@@ -1,0 +1,159 @@
+@import url(./global.css);
+@import url(./layout.css);
+@import url(./typography.css);
+@import url(./nav.css);
+@import url(./button.css);
+@import url(./form.css);
+@import url(./media.css);
+@import url(./table.css);
+@import url(./grid.css);
+@import url(./card.css);
+@import url(./helper.css);
+@import url(./theme.css);
+
+/* NMA teaching additions */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  color: #182022;
+}
+
+.site-logo {
+  letter-spacing: 0.08em;
+}
+
+.site-header-toggle {
+  cursor: pointer;
+}
+
+/* 手機版選單展開 */
+.site-header .site-menu.is-open {
+  display: flex !important;
+  flex-direction: column !important;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: transparent !important;
+  padding: 8px 0 !important;
+  gap: 0 !important;
+  z-index: 999;
+  transition: background 0.6s ease;
+}
+
+.site-header.scrolled .site-menu.is-open {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* 手機版選單項目 */
+@media (max-width: 992px) {
+  .site-header .site-menu.is-open .nav-link {
+    display: block !important;
+    width: 100% !important;
+    padding: 22px 24px !important;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: none !important;
+    line-height: 1.4 !important;
+    font-size: 16px !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
+
+  .site-header .site-menu.is-open #login-button-container {
+    display: block !important;
+    width: 100%;
+  }
+
+  .site-header .site-menu.is-open .authenticated-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0;
+  }
+
+  .site-header .site-menu.is-open .admin-btn,
+  .site-header .site-menu.is-open .logout-link,
+  .site-header .site-menu.is-open .login-btn {
+    display: block !important;
+    width: 100%;
+    padding: 10px 24px !important;
+    height: auto !important;
+    white-space: nowrap;
+    text-align: left;
+  }
+}
+
+/* 電腦版：所有項目同排對齊 */
+@media (min-width: 993px) {
+  .site-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .site-menu {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 30px;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 60px;
+  }
+
+  .site-menu .nav-link {
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #login-button-container {
+    display: flex !important;
+    align-items: center !important;
+    height: 60px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .authenticated-menu {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 30px;
+    height: 60px;
+  }
+
+  .admin-btn,
+  .logout-link,
+  .login-btn {
+    display: flex !important;
+    align-items: center !important;
+    height: 60px !important;
+    white-space: nowrap !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.js-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.artist-note {
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+}

@@ -1,0 +1,52 @@
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.media {
+/* 設定下方外距。 */
+	margin-bottom: 15px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.media:after {
+/* 設定 CSS 屬性 content，用來微調版面或視覺表現。 */
+	content: '';
+/* 清除浮動效果，避免後續區塊被浮動元素影響。 */
+	clear: both;
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+	display: block;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.media-is {
+/* 讓元素向左或向右浮動，是早期欄位排版的重要方法。 */
+	float: left;
+/* 設定右側外距。 */
+	margin-right: 10px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.media-content {
+/* 控制內容超出容器時的顯示方式。 */
+	overflow: hidden;
+/* 結束目前的 CSS 樣式區塊。 */
+}
+/* 空白行，用來分隔不同樣式區塊。 */
+
+/* 選擇器開頭，指定接下來的屬性要套用到哪些 HTML 元素。 */
+.media-title {
+/* 設定元素顯示模式，例如 block、inline-block、flex。 */
+	display: block;
+/* 設定 CSS 屬性 font-weight，用來微調版面或視覺表現。 */
+	font-weight: 500;
+/* 設定行高，影響段落閱讀節奏。 */
+	line-height: 1;
+/* 設定上方外距。 */
+	margin-top: 0;
+/* 設定下方外距。 */
+	margin-bottom: 15px;
+/* 結束目前的 CSS 樣式區塊。 */
+}
